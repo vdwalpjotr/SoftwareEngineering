@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 5 elements to &apos;TestingGroundPjotre/src/dice&apos;&#x0D;&#x0A;- Original project: &apos;TimZijnSpeeltuin&apos;&#x0D;&#x0A;- Destination element: &apos;TestingGroundPjotre/src/dice&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     DobbelsteenController.java&#x0D;&#x0A;     TekstView.java&#x0D;&#x0A;     DobbelsteenView.java&#x0D;&#x0A;     DobbelsteenModel.java&#x0D;&#x0A;     DobbelsteenMVC.java" description="Copy compilation units" destination="=TestingGroundPjotre/src&lt;dice" element1="/src&lt;{DobbelsteenController.java" element2="/src&lt;{TekstView.java" element3="/src&lt;{DobbelsteenView.java" element4="/src&lt;{DobbelsteenModel.java" element5="/src&lt;{DobbelsteenMVC.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1455135134130" units="5" version="1.0"/>
+</session>
