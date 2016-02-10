@@ -81,3 +81,6 @@ org.eclipse.dltk.core.ModelException: RemoteSystemsTempFiles does not exist
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
 !SUBENTRY 1 org.eclipse.dltk.core 4 969 2016-02-10 21:11:03.470
 !MESSAGE RemoteSystemsTempFiles does not exist
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-02-10 22:36:36.848
+!MESSAGE The workspace will exit with unsaved changes in this session.
