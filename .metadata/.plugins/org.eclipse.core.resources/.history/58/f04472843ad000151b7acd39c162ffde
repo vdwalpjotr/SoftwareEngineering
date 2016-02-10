@@ -38,18 +38,11 @@ public class DobbelsteenModel
 	    if (waarde<1) waarde=6;
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
 	}
-	public int getAantalWorpen(){
-		return aantalWorpen;
-	}
-	
-	public int getTotaalAantalHit(int ogenAantal){
-		return totaalWorpen[ogenAantal-1];
-	}
 	
 	public void gooi(){
 		aantalWorpen++;
 	    waarde= (int)(Math.random()*6+1);
-	    totaalWorpen[waarde-1]++;
+	    totaalWorpen[waarde]++;
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
 	}
 	

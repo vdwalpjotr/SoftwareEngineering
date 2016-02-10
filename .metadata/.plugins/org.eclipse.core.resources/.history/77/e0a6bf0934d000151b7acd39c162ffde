@@ -1,0 +1,9 @@
+package dice;
+import javax.swing.*;
+/*
+ * Deze view laat de statistieken van de worpen zien
+ */
+public class StatistiekView extends JPanel implements ActionListener{
+	
+
+}

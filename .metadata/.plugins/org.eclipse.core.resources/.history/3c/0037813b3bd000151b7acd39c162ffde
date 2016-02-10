@@ -30,13 +30,11 @@ public class DobbelsteenMVC extends JApplet
         tekstView.setBackground(Color.green);
         getContentPane().add(tekstView,BorderLayout.SOUTH);
         statistiekView = new StatistiekView();
-        getContentPane().add(statistiekView, BorderLayout.EAST);
         
         
         // Registreer de views bij het model
         model.addActionListener(tekstView);
         model.addActionListener(dobbelsteenView);
-        model.addActionListener(statistiekView);
         
         // Eerste worp
         model.gooi();

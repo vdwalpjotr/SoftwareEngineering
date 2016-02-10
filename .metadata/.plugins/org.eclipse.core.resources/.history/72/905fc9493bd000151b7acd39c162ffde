@@ -36,7 +36,6 @@ public class DobbelsteenMVC extends JApplet
         // Registreer de views bij het model
         model.addActionListener(tekstView);
         model.addActionListener(dobbelsteenView);
-        model.addActionListener(statistiekView);
         
         // Eerste worp
         model.gooi();
