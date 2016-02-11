@@ -8,13 +8,13 @@ import java.util.*;
  * Deze view laat de statistieken van de worpen zien
  */
 public class StatistiekView extends JPanel implements ActionListener{
-	private JTextField totaalVeld = new JTextField(6);
-	private JTextField aantalEenVeld = new JTextField();
-	private JTextField aantalTweeVeld = new JTextField();
-	private JTextField aantalDrieVeld = new JTextField();
-	private JTextField aantalVierVeld = new JTextField();
-	private JTextField aantalVijfVeld = new JTextField();
-	private JTextField aantalZesVeld = new JTextField();
+	private JLabel totaalVeld = new JLabel();
+	private JLabel aantalEenVeld = new JLabel();
+	private JLabel aantalTweeVeld = new JLabel();
+	private JLabel aantalDrieVeld = new JLabel();
+	private JLabel aantalVierVeld = new JLabel();
+	private JLabel aantalVijfVeld = new JLabel();
+	private JLabel aantalZesVeld = new JLabel();
 	DobbelsteenModel d;
 	
 	private int totalCount = 0;
