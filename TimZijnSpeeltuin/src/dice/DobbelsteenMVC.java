@@ -22,13 +22,16 @@ public class DobbelsteenMVC extends JApplet
         controller.setBackground(Color.cyan);
         getContentPane().add(controller,BorderLayout.NORTH);
         
+        JPanel panelCombi = new JPanel(new BorderLayout());
+        getContentPane().add(panelCombi, BorderLayout.CENTER);
+        
         // Maak de views
         dobbelsteenView = new DobbelsteenView(Color.red);
         dobbelsteenView.setBackground(Color.black);
-        getContentPane().add(dobbelsteenView,BorderLayout.CENTER);
+        panelCombi.add(dobbelsteenView,BorderLayout.CENTER);
         tekstView = new TekstView();
         tekstView.setBackground(Color.green);
-        getContentPane().add(tekstView,BorderLayout.SOUTH);
+        panelCombi.add(tekstView,BorderLayout.SOUTH);
         statistiekView = new StatistiekView();
         getContentPane().add(statistiekView, BorderLayout.EAST);
         
