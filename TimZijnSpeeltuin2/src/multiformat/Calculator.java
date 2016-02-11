@@ -25,6 +25,8 @@ public class Calculator {
   private Rational operand_0 = new Rational();
   private Rational operand_1 = new Rational();
   
+  private int totalCalculations = 0;
+  
   // The current format of the calculator
   private Format format = new FixedPointFormat();
   // The current numberbase of the calculator
@@ -90,4 +92,12 @@ public class Calculator {
   public Format getFormat(){
     return format;
   }
+  
+  public void increaseCalculations() {
+	  totalCalculations++;
+  }
+  
+  public int getCalculations() {
+		return totalCalculations;
+	}
 }
