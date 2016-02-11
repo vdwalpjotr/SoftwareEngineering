@@ -34,9 +34,9 @@ public class TestDividebyZero extends TestCase {
 		try{
 		calc.addOperand("1.0");
 		calc.addOperand("0.0");
-		assertEquals("1.0",calc.firstOperand());
-		assertEquals("0.0",calc.secondOperand());
 		calc.divide();
+		assertEquals("0.0",calc.firstOperand());
+		assertEquals("0.0",calc.secondOperand());
 		}catch(FormatException e){
 			fail("Unexpected format exception");
 		}
