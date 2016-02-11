@@ -18,10 +18,13 @@
  */
 package multiformat;
 
+import org.junit.Test;
+
 /**
  * Class representing a rational ('breuk').
  * @author J.Baljé: Added comments
  */
+
 public class Rational {
 	static final double PRECISION=10;
 	static final double EPSILON = Math.pow(10,-PRECISION);
@@ -34,9 +37,14 @@ public class Rational {
 	 * @param num Numerator 
 	 * @param den Denominator 
 	 */
+	
 	public Rational(double num, double den) {
 		numerator = num;
+		if(den==0){
+			System.out.println("Division by 0, enter a new operand");
+		}else{
 		denominator = den;
+		}
 		simplify();
 	}
 
