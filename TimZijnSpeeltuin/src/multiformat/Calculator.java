@@ -31,8 +31,23 @@ public class Calculator {
   private Base base = new DecimalBase();
 
   public void addOperand(String newOperand) throws FormatException {
-	  operand_1 = operand_0;
-      operand_0 = format.parse(newOperand, base);
+	  Rational test = format.parse(newOperand, base);
+	  String test2 = format.toString(test, base);
+	  if(!newOperand.contains(".")) {
+		  newOperand = newOperand+".0";
+	  }
+	  if(!test2.equals(newOperand)) {
+		  try {
+		  throw new NumberBaseException("Wrong number for this base.");
+	  }
+	  catch(NumberBaseException e) {
+		  System.out.println(e.getMessage());
+	  }
+	  }
+	  else {
+		  operand_1 = operand_0;
+	      operand_0 = format.parse(newOperand, base);		  
+	  }
   }
 
   public void add(){
