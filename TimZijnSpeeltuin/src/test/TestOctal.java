@@ -21,6 +21,11 @@ public class TestOctal extends TestCase {
 		assertEquals("5.0",calc.firstOperand());
 		assertEquals("12.0",calc.secondOperand());
 		
+		calc.add();
+		
+		assertEquals("0.0",calc.firstOperand());
+		assertEquals("17.0",calc.secondOperand());
+		
 		}catch(FormatException e){
 			fail("Unexpected exception");
 		}
