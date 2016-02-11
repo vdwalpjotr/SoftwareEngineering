@@ -30,20 +30,23 @@ public class DobbelsteenModel
 	    // In dit geval zou je die kunnen gebruiken om de nieuwe dobbelsteenwaarde mee te geven
 	    // aan de ActionListener. Dan hoeft de ActionListener niet met e.getSource() weer naar
 	    // het model toe te gaan.
+	    totaalWorpen[waarde-1]++;
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
 	} 
 	public void verlaag()
 	{
+		aantalWorpen++;
 	    waarde--;
 	    if (waarde<1) waarde=6;
+	    totaalWorpen[waarde-1]++;
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
 	}
 	public int getAantalWorpen(){
 		return aantalWorpen;
 	}
 	
-	public int getTotaalAantalHit(int ogenAantal){
-		return totaalWorpen[ogenAantal-1];
+	public int[] getTotaalAantalHit(){
+		return totaalWorpen;
 	}
 	
 	public void gooi(){

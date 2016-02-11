@@ -35,35 +35,25 @@ public class StatistiekView extends JPanel implements ActionListener{
 		this.add(aantalVierVeld);
 		this.add(aantalVijfVeld);
 		this.add(aantalZesVeld);
+		
+		
 	}
 	public void actionPerformed(ActionEvent e)
 	{
 		d = (DobbelsteenModel) e.getSource();
 		int number = d.getWaarde();
 		
-		totalCount++;
-		totaalVeld.setText(totalCount+" worpen");
+		totaalVeld.setText(d.getAantalWorpen()+" worpen");
 		
-		switch(number) {
-			case 1 :	countOne++;
-						aantalEenVeld.setText("1: "+countOne+" keer");
-						break;
-			case 2 : 	countTwo++;
-						aantalTweeVeld.setText("2: "+countTwo+" keer");
-						break;
-			case 3 : 	countThree++;
-						aantalDrieVeld.setText("3: "+countThree+" keer");
-						break;
-			case 4 : 	countFour++;
-						aantalVierVeld.setText("4: "+countFour+" keer");
-						break;
-			case 5 : 	countFive++;
-						aantalVijfVeld.setText("5: "+countFive+" keer");
-						break;
-			case 6 : 	countSix++;
-						aantalZesVeld.setText("6: "+countSix+" keer");
-						break;
-		} 
+		int[] worpen = d.getTotaalAantalHit();
+		
+		aantalEenVeld.setText("1: "+worpen[0]+" keer");
+		aantalTweeVeld.setText("2: "+worpen[1]+" keer");
+		aantalDrieVeld.setText("3: "+worpen[2]+" keer");
+		aantalVierVeld.setText("4: "+worpen[3]+" keer");
+		aantalVijfVeld.setText("5: "+worpen[4]+" keer");
+		aantalZesVeld.setText("6: "+worpen[5]+" keer");
+
 	}
 	public Dimension getPrefferedSize()
 	{

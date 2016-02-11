@@ -14,9 +14,9 @@ public class sumArrays {
 	public sumArrays() {
 		try {
 		BufferedReader lineReader = new  BufferedReader( new InputStreamReader( System.in ) );
-		System.out.println("Please seperate the numbers with a ','");
+		System.out.println("Please seperate the integers with a ','");
 		System.out.println("First Array");
-		System.out.print("numbers: ");
+		System.out.print("Integers: ");
 		
 		String command1 = lineReader.readLine();
 		System.out.println(command1);
@@ -24,7 +24,7 @@ public class sumArrays {
 		
 		System.out.println();
 		System.out.println("Second Array");
-		System.out.print("numbers: ");
+		System.out.print("Integers: ");
 		String command2 = lineReader.readLine();
 		System.out.println(command2);
 		int[] secondArray = intArray(command2);
@@ -62,7 +62,7 @@ public class sumArrays {
 		    intArray[i] = Integer.parseInt(strArray[i]);
 			}
 			catch (NumberFormatException e) {
-				System.out.println("Please only insert numbers.");
+				System.out.println("Please only insert Integers.");
 				System.exit(1);
 			}
 		}
