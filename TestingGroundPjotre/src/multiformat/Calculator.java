@@ -55,18 +55,22 @@ public class Calculator {
   public void add(){
     operand_0 = operand_1.plus(operand_0);
     operand_1 = new Rational();
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public void subtract() {
     operand_0 = operand_1.minus(operand_0);
     operand_1 = new Rational();
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public void multiply() {
     operand_0 = operand_1.mul(operand_0);
     operand_1 = new Rational();
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public void divide() {
     operand_0 = operand_1.div(operand_0);
     operand_1 = new Rational();
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public void delete() {
     operand_0 = operand_1;
@@ -97,6 +101,7 @@ public class Calculator {
   }
   public void emptyInputOperand(){
 	  inputOperand = null;
+	  processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public void setInputOperand(String input){
 	  if(inputOperand == null){

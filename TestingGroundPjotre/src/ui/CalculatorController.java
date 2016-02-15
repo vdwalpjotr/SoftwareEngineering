@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 import multiformat.*;
 /*
- * Deze klasse maakt en regelt de control van het paneel
+ * Deze klasse maakt en regelt de input van de getallen
  */
 public class CalculatorController extends JPanel implements ActionListener{
 	Calculator calc;
@@ -93,6 +93,7 @@ public class CalculatorController extends JPanel implements ActionListener{
 			catch(Exception Ex){
 				System.out.println("Add operand failed");
 			}
+			
 		}
 	}
 }
