@@ -1,6 +1,12 @@
 package ui;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.*;
 import multiformat.*;
 /*
@@ -19,9 +25,11 @@ public class CalculatorController extends JPanel implements ActionListener{
 	private JButton n9 = new JButton("9");
 	private JButton n0 = new JButton("0");
 	private JButton comma = new JButton(",");
-	private JButton submit = new JButton("Submit");
+	private JButton submit = new JButton(">");
 
 	public CalculatorController(Calculator c){
+		this.setLayout(new GridLayout(4,3));
+
 		calc = c;
 		this.add(n1);
 		n1.addActionListener(this);
@@ -92,6 +100,7 @@ public class CalculatorController extends JPanel implements ActionListener{
 			}
 			catch(Exception Ex){
 				System.out.println("Add operand failed");
+
 			}
 			
 		}
