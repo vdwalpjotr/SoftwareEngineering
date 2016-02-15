@@ -17,14 +17,6 @@ public class StatistiekView extends JPanel implements ActionListener{
 	private JLabel aantalZesVeld = new JLabel();
 	DobbelsteenModel d;
 	
-	private int totalCount = 0;
-	private int countOne = 0;
-	private int countTwo = 0;
-	private int countThree = 0;
-	private int countFour = 0;
-	private int countFive = 0;
-	private int countSix = 0;
-
 	public StatistiekView()
 	{
 		this.setLayout(new GridLayout(7,1));
@@ -34,15 +26,11 @@ public class StatistiekView extends JPanel implements ActionListener{
 		this.add(aantalDrieVeld);
 		this.add(aantalVierVeld);
 		this.add(aantalVijfVeld);
-		this.add(aantalZesVeld);
-		
-		
+		this.add(aantalZesVeld);	
 	}
 	public void actionPerformed(ActionEvent e)
 	{
-		d = (DobbelsteenModel) e.getSource();
-		int number = d.getWaarde();
-		
+		d = (DobbelsteenModel) e.getSource();	
 		totaalVeld.setText(d.getAantalWorpen()+" worpen");
 		
 		int[] worpen = d.getTotaalAantalHit();
@@ -53,7 +41,6 @@ public class StatistiekView extends JPanel implements ActionListener{
 		aantalVierVeld.setText("4: "+worpen[3]+" keer");
 		aantalVijfVeld.setText("5: "+worpen[4]+" keer");
 		aantalZesVeld.setText("6: "+worpen[5]+" keer");
-
 	}
 	public Dimension getPrefferedSize()
 	{
