@@ -135,7 +135,7 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 			calc.setCurrentNumber("7");			
 		}
 		else if(e.getSource() == button8) {
-			calc.setCurrentNumber("8");			
+			calc.setCurrentNumber("8");	
 		}
 		else if(e.getSource() == button9) {
 			calc.setCurrentNumber("9");			

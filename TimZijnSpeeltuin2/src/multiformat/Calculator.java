@@ -20,6 +20,9 @@ package multiformat;
 
 import java.util.ArrayList;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 /**
  * The multiformat calculator
  */
@@ -31,7 +34,9 @@ public class Calculator {
   
   private String currentNumber = "";
   private String operator = "";
-  
+  private ArrayList<EventHandler<ActionEvent>> eventHandlerList = new ArrayList<EventHandler<ActionEvent>>();
+  private String printText = "";
+  	
   // The current format of the calculator
   private Format format = new FixedPointFormat();
   // The current numberbase of the calculator
@@ -107,16 +112,39 @@ public class Calculator {
 	}
   
   public void setCurrentNumber(String number) {
+	  if(operator.equals("")) {
+		  setPrintText("");
+	  }
 	  if(number.equals("-")) {
 		  currentNumber = number+currentNumber;
 	  }
 	  else {
 		  currentNumber = currentNumber+number;		  
 	  }
+	  
+	  setPrintText(number);
+	  processEvent(new ActionEvent(this, ActionEvent.NULL_SOURCE_TARGET));
   }
   
   public String getCurrentNumber() {
 	  return currentNumber;
+  }
+  
+  public void setPrintText(String t) {
+	  if(t.equals("")) {
+		  printText = t;
+	  }
+	  else {
+		  printText = printText+t;		  
+	  }
+  }
+  
+  public String getPrintText() {
+	  return printText;
+  }
+  
+  public void reset() {
+	  
   }
   
   public void operatorClicked(String op) {
@@ -127,6 +155,8 @@ public class Calculator {
 		addOperand(currentNumber);
 		currentNumber = "";
 		operator = op;
+		setPrintText(op);
+		processEvent(new ActionEvent(this, ActionEvent.NULL_SOURCE_TARGET));
 	} catch (FormatException e) {
 		e.printStackTrace();
 	}
@@ -152,6 +182,12 @@ public class Calculator {
 				divide();
 				increaseCalculations();
 			}
+			
+		    setPrintText("="+secondOperand());
+		    processEvent(new ActionEvent(this, ActionEvent.NULL_SOURCE_TARGET));
+		    
+		    operator = "";
+		    
 			System.out.println(firstOperand());
 			System.out.println(secondOperand());
 			
@@ -159,4 +195,18 @@ public class Calculator {
 			e.printStackTrace();
 		}
   }
+
+	public void addEventHandler( EventHandler<ActionEvent> l){
+		eventHandlerList.add( l );
+	}
+
+	public void removeEventHandler( EventHandler<ActionEvent> l){
+		if ( eventHandlerList.contains( l ) )
+			eventHandlerList.remove( l );
+	}
+	
+	private void processEvent(ActionEvent e){
+		for( EventHandler<ActionEvent> l : eventHandlerList)
+			l.handle(e);
+	}
 }

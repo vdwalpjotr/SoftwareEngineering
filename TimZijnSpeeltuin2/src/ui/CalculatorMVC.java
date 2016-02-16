@@ -31,12 +31,17 @@ public class CalculatorMVC extends Application
 	public void start(Stage primaryStage)
 	{
 		calc = new Calculator();
-		Pane mainPane = new Pane();
+		BorderPane mainPane = new BorderPane();
+		
 		
 		CalculatorController calculatorController = new CalculatorController(calc);
+	    calculatorController.setStyle("-fx-background-color: blue;");
+		resultView = new ResultView();
+	    resultView.setStyle("-fx-background-color: black;");
+		mainPane.setCenter(calculatorController);
+		mainPane.setTop(resultView);
 		
-		
-		mainPane.getChildren().add(calculatorController);
+		calc.addEventHandler(resultView);
 		
 		Scene scene = new Scene(mainPane, 250, 200);
 		primaryStage.setTitle("Most Awesome Calculator Ever");

@@ -1,32 +1,38 @@
 package ui;
 import javax.swing.*;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import multiformat.Calculator;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.*;
     
-public class ResultView extends JPanel implements ActionListener
+public class ResultView extends FlowPane implements EventHandler<ActionEvent>
 {
-	private JTextField resultField = new JTextField();
-    Calculator c;
+	private TextField resultField;
+    Calculator calc;
     
 	public ResultView()
 	{
-	    this.setLayout(new FlowLayout());
-	    this.add(resultField);
+		 resultField = new TextField();
+		 resultField.setMinWidth(Double.MAX_VALUE);
+		 this.getChildren().add(resultField);
 	}
 	
-	public void actionPerformed( ActionEvent e )
+	public void handle(ActionEvent e)
 	{
-	    c = (Calculator) e.getSource();
-	    resultField.setText(""+c.getCalculations());
+	    calc = (Calculator) e.getSource();
+	    resultField.setText(calc.getPrintText());
 	}
 	
 	public Dimension getPreferredSize()
 	{
 	    return new Dimension(50,50);
-	} 
+	}
 }
