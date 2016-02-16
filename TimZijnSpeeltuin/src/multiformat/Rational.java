@@ -18,8 +18,6 @@
  */
 package multiformat;
 
-import org.junit.Test;
-
 /**
  * Class representing a rational ('breuk').
  * @author J.Baljé: Added comments

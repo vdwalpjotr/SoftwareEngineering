@@ -4,12 +4,14 @@ import java.awt.Panel;
 import java.awt.event.*;
 import javax.swing.*;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import multiformat.Calculator;
@@ -42,11 +44,15 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 		
 	private Button buttonReset;
 	private Button buttonResult;
+	//private ComboBox comboBoxBases;
 	
+	//private ObservableList<String> baseList = new FXCollections.observableArrayList("Dec", "Oct", "Hex");
 	private ObservableList<Node> childrenList;
 	
 	public CalculatorController(Calculator c) {
 		calc = c;
+		
+	//	comboBoxBases.getItems().addAll("Dec", "Oct", "Hex");
 		
 		gridPane = new GridPane();
 				
@@ -63,16 +69,16 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 		
 		button9.setMaxWidth(50);
 		
-		gridPane.add(button0, 2, 1);
-		gridPane.add(button1, 1, 1);
-		gridPane.add(button2, 0, 1);
-		gridPane.add(button3, 2, 2);
-		gridPane.add(button4, 1, 2);
-		gridPane.add(button5, 0, 2);
-		gridPane.add(button6, 2, 3);
-		gridPane.add(button7, 1, 3);
-		gridPane.add(button8, 0, 3);
-		gridPane.add(button9, 1, 4);
+		gridPane.add(button0, 1, 4);
+		gridPane.add(button1, 2, 3);
+		gridPane.add(button2, 1, 3);
+		gridPane.add(button3, 0, 3);
+		gridPane.add(button4, 2, 2);
+		gridPane.add(button5, 1, 2);
+		gridPane.add(button6, 0, 2);
+		gridPane.add(button7, 2, 1);
+		gridPane.add(button8, 1, 1);
+		gridPane.add(button9, 0, 1);
 		
 		buttonMultiply = new Button("x");
 		buttonDivide = new Button("/");
@@ -95,6 +101,7 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 		
 		gridPane.add(buttonReset, 1, 5);
 		gridPane.add(buttonResult, 2, 5);
+	//	gridPane.add(comboBoxBases, 1, 6);
 		
 		childrenList = gridPane.getChildren();
 		for(Node child : childrenList) {
@@ -102,6 +109,7 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 				((Button) child).setMaxWidth(50);
 				((Button) child).setMinWidth(50);
 				((Button) child).setOnAction(this);
+				((Button) child).setStyle("-fx-background-radius: 0;");
 			}
 		}
 		
@@ -111,7 +119,6 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 	public void handle(ActionEvent e) {		
 		if(e.getSource() == button0) {
 			calc.setCurrentNumber("0");
-			System.out.println(calc.getCurrentNumber());
 		}
 		else if(e.getSource() == button1) {
 			calc.setCurrentNumber("1");			
@@ -141,9 +148,14 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 			calc.setCurrentNumber("9");			
 		}
 		else if(e.getSource() == buttonOpposit) {
-			calc.setCurrentNumber("-");		}
+			calc.setCurrentNumber("-");
+		}
+		else if(e.getSource() == buttonDot) {
+			calc.setCurrentNumber(".");
+		}
 		else if(e.getSource() == buttonDivide) {
-			calc.operatorClicked("/");		}
+			calc.operatorClicked("/");
+		}
 		else if(e.getSource() == buttonMultiply) {
 			calc.operatorClicked("x");			
 		}

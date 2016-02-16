@@ -26,7 +26,7 @@ import org.junit.Test;
  */
 
 public class Rational {
-	static final double PRECISION=10;
+	static final double PRECISION=2;
 	static final double EPSILON = Math.pow(10,-PRECISION);
 	
 	double numerator = 0.0; // teller

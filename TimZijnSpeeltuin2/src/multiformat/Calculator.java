@@ -114,9 +114,12 @@ public class Calculator {
   public void setCurrentNumber(String number) {
 	  if(operator.equals("")) {
 		  setPrintText("");
+		  operator = "#";
 	  }
 	  if(number.equals("-")) {
 		  currentNumber = number+currentNumber;
+		  number = currentNumber;
+		  setPrintText("");
 	  }
 	  else {
 		  currentNumber = currentNumber+number;		  
@@ -183,7 +186,8 @@ public class Calculator {
 				increaseCalculations();
 			}
 			
-		    setPrintText("="+secondOperand());
+			setPrintText("");
+		    setPrintText(secondOperand());
 		    processEvent(new ActionEvent(this, ActionEvent.NULL_SOURCE_TARGET));
 		    
 		    operator = "";
