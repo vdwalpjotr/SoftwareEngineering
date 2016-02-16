@@ -13,6 +13,7 @@ public class CalculatorMVC extends JApplet {
 	
 	CalculatorView antwoordView; // view
 	CalculatorInputView inputView; //view
+	TotaalBerekeningenView totaalBerekeningView; // view
 	CalculatorController controller; //controller voor getalleninput
 	OperatorController opcontroller; //controller voor operatorinput
 	
@@ -29,6 +30,7 @@ public class CalculatorMVC extends JApplet {
 		JPanel opControlPanel = new JPanel();
 		inputView = new CalculatorInputView();
 		antwoordView = new CalculatorView();
+		totaalBerekeningView = new TotaalBerekeningenView();
 		
 		getContentPane().add(controlPanel,BorderLayout.WEST);
 		getContentPane().add(viewPanel, BorderLayout.NORTH);
@@ -36,9 +38,10 @@ public class CalculatorMVC extends JApplet {
 		controlPanel.add(opcontroller, BorderLayout.EAST);
 		viewPanel.add(inputView, BorderLayout.EAST);
 		viewPanel.add(antwoordView, BorderLayout.WEST);
-
+		getContentPane().add(totaalBerekeningView, BorderLayout.SOUTH);
 		model.addActionListener(inputView);
 		model.addActionListener(antwoordView);
+		model.addActionListener(totaalBerekeningView);
 	}
 
 }

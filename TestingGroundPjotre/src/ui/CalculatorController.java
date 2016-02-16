@@ -58,6 +58,7 @@ public class CalculatorController extends JPanel implements ActionListener{
 		this.add(n0);
 		n0.addActionListener(this);
 		this.add(comma);
+		comma.addActionListener(this);
 		this.add(nA);
 		nA.addActionListener(this);
 		this.add(nB);
@@ -70,8 +71,8 @@ public class CalculatorController extends JPanel implements ActionListener{
 		nE.addActionListener(this);
 		this.add(nF);
 		nF.addActionListener(this);
-		comma.addActionListener(this);
 		this.add(submit);
+		submit.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e){

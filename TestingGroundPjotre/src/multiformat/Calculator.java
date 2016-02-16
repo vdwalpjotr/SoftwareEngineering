@@ -24,6 +24,7 @@ import java.awt.event.*;
  */
 public class Calculator {
   private String inputOperand;
+  private int totaalBerekeningen;
   private Rational operand_0 = new Rational();
   private Rational operand_1 = new Rational();
   private ArrayList<ActionListener> inputListenerList = new ArrayList<ActionListener>();
@@ -31,7 +32,12 @@ public class Calculator {
   private Format format = new FixedPointFormat();
   // The current numberbase of the calculator
   private Base base = new DecimalBase();
-
+  public void addCalc(){
+	  totaalBerekeningen++;
+  }
+  public int getTotaalBerekening(){
+	  return totaalBerekeningen;
+  }
   public void addOperand(String newOperand) throws FormatException {
 	  Rational test = format.parse(newOperand, base);
 	  String test2 = format.toString(test, base);

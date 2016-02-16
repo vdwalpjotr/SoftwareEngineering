@@ -54,16 +54,23 @@ public class OperatorController extends JPanel implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == plus){
+			calc.addCalc();
 			calc.add();
+			
 		}
 		if(e.getSource() == min){
+			calc.addCalc();
 			calc.subtract();
+			
 		}
 		if(e.getSource()== keer){
+			calc.addCalc();
 			calc.multiply();
+			
 		}
 		if(e.getSource()== delen){
 			calc.divide();
+			calc.addCalc();
 		}
 		if(e.getSource() == decimal){
 			calc.setBase(new DecimalBase());
