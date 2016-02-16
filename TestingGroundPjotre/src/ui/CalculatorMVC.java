@@ -29,13 +29,12 @@ public class CalculatorMVC extends JApplet {
 		antwoordView = new CalculatorView();
 		
 		getContentPane().add(controlPanel,BorderLayout.WEST);
-		getContentPane().add(opControlPanel, BorderLayout.CENTER);
 		getContentPane().add(viewPanel, BorderLayout.NORTH);
-		controlPanel.add(controller, BorderLayout.CENTER);
-		opControlPanel.add(opcontroller,BorderLayout.CENTER);
+		controlPanel.add(controller, BorderLayout.WEST);
+		controlPanel.add(opcontroller, BorderLayout.EAST);
 		viewPanel.add(inputView, BorderLayout.EAST);
 		viewPanel.add(antwoordView, BorderLayout.WEST);
-		getContentPane().add(opcontroller, BorderLayout.SOUTH);
+
 		model.addActionListener(inputView);
 		model.addActionListener(antwoordView);
 	}

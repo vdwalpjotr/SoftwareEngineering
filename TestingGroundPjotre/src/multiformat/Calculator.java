@@ -86,6 +86,7 @@ public class Calculator {
 
   public void setBase(Base newBase){
     base = newBase;
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public Base getBase(){
     return base;
