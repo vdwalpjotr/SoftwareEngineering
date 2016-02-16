@@ -26,9 +26,15 @@ public class CalculatorController extends JPanel implements ActionListener{
 	private JButton n0 = new JButton("0");
 	private JButton comma = new JButton(",");
 	private JButton submit = new JButton(">");
-
+	private JButton nA = new JButton("A");
+	private JButton nB = new JButton("B");
+	private JButton nC = new JButton("C");
+	private JButton nD = new JButton("D");
+	private JButton nE = new JButton("E");
+	private JButton nF = new JButton("F");
+	
 	public CalculatorController(Calculator c){
-		this.setLayout(new GridLayout(4,3));
+		this.setLayout(new GridLayout(7,3));
 
 		calc = c;
 		this.add(n1);
@@ -52,10 +58,20 @@ public class CalculatorController extends JPanel implements ActionListener{
 		this.add(n0);
 		n0.addActionListener(this);
 		this.add(comma);
+		this.add(nA);
+		nA.addActionListener(this);
+		this.add(nB);
+		nB.addActionListener(this);
+		this.add(nC);
+		nC.addActionListener(this);
+		this.add(nD);
+		nD.addActionListener(this);
+		this.add(nE);
+		nE.addActionListener(this);
+		this.add(nF);
+		nF.addActionListener(this);
 		comma.addActionListener(this);
 		this.add(submit);
-		submit.addActionListener(this);
-		
 	}
 
 	public void actionPerformed(ActionEvent e){
@@ -91,6 +107,25 @@ public class CalculatorController extends JPanel implements ActionListener{
 		}
 		if(e.getSource() == comma){
 			calc.setInputOperand(".");
+		}
+		if(e.getSource() == nA){
+			calc.setInputOperand("A");
+		}
+		if(e.getSource() == nB){
+			calc.setInputOperand("B");
+		}
+		if(e.getSource() == nC){
+			calc.setInputOperand("C");
+			
+		}
+		if(e.getSource() == nD){
+			calc.setInputOperand("D");
+		}
+		if(e.getSource() == nE){
+			calc.setInputOperand("E");
+		}
+		if(e.getSource() == nF){
+			calc.setInputOperand("F");
 		}
 		if(e.getSource() == submit){
 			try{

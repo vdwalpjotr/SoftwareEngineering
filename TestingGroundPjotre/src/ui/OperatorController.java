@@ -20,8 +20,12 @@ public class OperatorController extends JPanel implements ActionListener{
 	private JButton binairy = new JButton("Bin");
 	private JButton hexadecimal = new JButton("hex");
 	private JButton octal = new JButton("oct");
+	private JButton fixedPoint = new JButton("fixP");
+	private JButton floatingPoint = new JButton("float");
+	private JButton rationalFormat = new JButton("rat");
+	private JButton delete = new JButton("del");
 	public OperatorController(Calculator c){
-		this.setLayout(new GridLayout(4,2));
+		this.setLayout(new GridLayout(7,2));
 		calc = c;
 		this.add(plus);
 		plus.addActionListener(this);
@@ -39,7 +43,14 @@ public class OperatorController extends JPanel implements ActionListener{
 		octal.addActionListener(this);
 		this.add(hexadecimal);
 		hexadecimal.addActionListener(this);
-		
+		this.add(fixedPoint);
+		fixedPoint.addActionListener(this);
+		this.add(floatingPoint);
+		floatingPoint.addActionListener(this);
+		this.add(rationalFormat);
+		rationalFormat.addActionListener(this);
+		this.add(delete);
+		delete.addActionListener(this);
 	}
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == plus){
@@ -65,6 +76,18 @@ public class OperatorController extends JPanel implements ActionListener{
 		}
 		if(e.getSource() == octal){
 			calc.setBase(new OctalBase());
+		}
+		if(e.getSource() == fixedPoint){
+			calc.setFormat(new FixedPointFormat());
+		}
+		if(e.getSource()== floatingPoint){
+			calc.setFormat(new FloatingPointFormat());
+		}
+		if(e.getSource()== rationalFormat){
+			calc.setFormat(new RationalFormat());
+		}
+		if(e.getSource() == delete){
+			calc.delete();
 		}
 	}
 }

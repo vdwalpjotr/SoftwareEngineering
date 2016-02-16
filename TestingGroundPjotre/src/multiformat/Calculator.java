@@ -75,6 +75,7 @@ public class Calculator {
   public void delete() {
     operand_0 = operand_1;
     operand_1 = new Rational();
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
 
   public String firstOperand(){
@@ -93,6 +94,7 @@ public class Calculator {
   }
   public void setFormat(Format newFormat){
     format = newFormat;
+    processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
   public Format getFormat(){
     return format;
