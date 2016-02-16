@@ -18,6 +18,8 @@
  */
 package multiformat;
 
+import java.util.ArrayList;
+
 /**
  * The multiformat calculator
  */
@@ -26,6 +28,9 @@ public class Calculator {
   private Rational operand_1 = new Rational();
   
   private int totalCalculations = 0;
+  
+  private String currentNumber = "";
+  private String operator = "";
   
   // The current format of the calculator
   private Format format = new FixedPointFormat();
@@ -100,4 +105,58 @@ public class Calculator {
   public int getCalculations() {
 		return totalCalculations;
 	}
+  
+  public void setCurrentNumber(String number) {
+	  if(number.equals("-")) {
+		  currentNumber = number+currentNumber;
+	  }
+	  else {
+		  currentNumber = currentNumber+number;		  
+	  }
+  }
+  
+  public String getCurrentNumber() {
+	  return currentNumber;
+  }
+  
+  public void operatorClicked(String op) {
+	  try {
+		  if(currentNumber.equals("")) {
+			  currentNumber = secondOperand();
+		  }
+		addOperand(currentNumber);
+		currentNumber = "";
+		operator = op;
+	} catch (FormatException e) {
+		e.printStackTrace();
+	}
+  }
+  
+  public void resultClicked() {
+		try {
+			addOperand(currentNumber);
+			currentNumber = "";
+			if(operator.equals("+")) {
+				add();
+				increaseCalculations();
+			}
+			else if(operator.equals("-")) {
+				subtract();
+				increaseCalculations();				
+			}
+			else if(operator.equals("x")) {
+				multiply();
+				increaseCalculations();
+			}
+			else if(operator.equals("/")) {
+				divide();
+				increaseCalculations();
+			}
+			System.out.println(firstOperand());
+			System.out.println(secondOperand());
+			
+		} catch (FormatException e) {
+			e.printStackTrace();
+		}
+  }
 }
