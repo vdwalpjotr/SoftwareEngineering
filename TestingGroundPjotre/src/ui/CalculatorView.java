@@ -14,6 +14,7 @@ public class CalculatorView extends JPanel implements ActionListener {
 	public CalculatorView()
 	{
 		this.add(antwoordVeld);
+		antwoordVeld.setText("<[dec, fixed, 0.0, 0.0]>" );
 	}
 	
 	public void actionPerformed(ActionEvent e){

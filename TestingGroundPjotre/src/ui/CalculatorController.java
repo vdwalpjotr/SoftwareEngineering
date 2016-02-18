@@ -33,6 +33,10 @@ public class CalculatorController extends JPanel implements ActionListener{
 	private JButton nE = new JButton("E");
 	private JButton nF = new JButton("F");
 	
+	/**
+	 * Constructor Calculator Controller
+	 * @param Calculator c, het model van de rekenmachine
+	 */
 	public CalculatorController(Calculator c){
 		this.setLayout(new GridLayout(7,3));
 

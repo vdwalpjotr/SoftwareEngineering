@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 import multiformat.*;
 /*
- * Deze klasse maakt en regelt de input van de getallen
+ * Klasse OperatorController regelt de input van de operatorknoppen
  */
 public class OperatorController extends JPanel implements ActionListener{
 	private Calculator calc;
@@ -20,10 +20,15 @@ public class OperatorController extends JPanel implements ActionListener{
 	private JButton binairy = new JButton("Bin");
 	private JButton hexadecimal = new JButton("hex");
 	private JButton octal = new JButton("oct");
+	//format modi
 	private JButton fixedPoint = new JButton("fixP");
 	private JButton floatingPoint = new JButton("float");
 	private JButton rationalFormat = new JButton("rat");
 	private JButton delete = new JButton("del");
+	/**
+	 * OperatorController Constructor creert de code,
+	 * @param Calculator c, het model van de rekenmachine 
+	 */
 	public OperatorController(Calculator c){
 		this.setLayout(new GridLayout(7,2));
 		calc = c;
@@ -52,6 +57,7 @@ public class OperatorController extends JPanel implements ActionListener{
 		this.add(delete);
 		delete.addActionListener(this);
 	}
+
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == plus){
 			calc.addCalc();

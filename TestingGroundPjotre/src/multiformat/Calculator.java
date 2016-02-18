@@ -23,7 +23,13 @@ import java.awt.event.*;
  * The multiformat calculator
  */
 public class Calculator {
+	/**
+	 * Opslag voor operanden View 
+	 */
   private String inputOperand;
+  /**
+   * Counter voor aantal berekeningen
+   */
   private int totaalBerekeningen;
   private Rational operand_0 = new Rational();
   private Rational operand_1 = new Rational();
@@ -32,12 +38,21 @@ public class Calculator {
   private Format format = new FixedPointFormat();
   // The current numberbase of the calculator
   private Base base = new DecimalBase();
+  
+  /**
+   * Verhoogt het totaal aantal berekeningen met 1.
+   */
   public void addCalc(){
 	  totaalBerekeningen++;
   }
   public int getTotaalBerekening(){
 	  return totaalBerekeningen;
   }
+  /**
+   * Voegt een paramater toe en brengt eerste operand naar  
+   * @param newOperand de toe te voegen operand
+   * @throws FormatException geeft exception als input buiten de format valt
+   */
   public void addOperand(String newOperand) throws FormatException {
 	  Rational test = format.parse(newOperand, base);
 	  String test2 = format.toString(test, base);
@@ -57,22 +72,33 @@ public class Calculator {
 	      operand_0 = format.parse(newOperand, base);		  
 	  }
   }
-
+/**
+ * Sommatie van operand 1 en operand 2
+ */
   public void add(){
     operand_0 = operand_1.plus(operand_0);
     operand_1 = new Rational();
     processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
+  /**
+   * Aftrekking van operand 1 en operand 2
+   */
   public void subtract() {
     operand_0 = operand_1.minus(operand_0);
     operand_1 = new Rational();
     processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
+  /**
+   * Multiplicatie van operand 1 en operand 2
+   */
   public void multiply() {
     operand_0 = operand_1.mul(operand_0);
     operand_1 = new Rational();
     processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
   }
+  /**
+   * Deliing van operand 1 en operand 2
+   */
   public void divide() {
     operand_0 = operand_1.div(operand_0);
     operand_1 = new Rational();
