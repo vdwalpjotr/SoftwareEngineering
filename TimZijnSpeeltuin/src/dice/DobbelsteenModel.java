@@ -23,6 +23,7 @@ public class DobbelsteenModel
     }    
 	public void verhoog()
 	{
+		aantalWorpen++;
 		waarde++;
 	    if (waarde>6) waarde=1;
 	    
