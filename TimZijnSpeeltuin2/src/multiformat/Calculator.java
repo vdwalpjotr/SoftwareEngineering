@@ -165,6 +165,30 @@ public class Calculator {
 	}
   }
   
+  public void changeBase(String base) {
+	  try {
+		addOperand(currentNumber);
+		System.out.println(operator);
+	} catch (FormatException e1) {
+		e1.printStackTrace();
+	}
+	  if(base.equals("Oct")) {
+		  setBase(new OctalBase());		  
+	  }
+	  else if(base.equals("Hex")) {
+		  setBase(new HexBase());
+	  }
+	  setPrintText("");
+	  if(operator.equals("") || operator.equals("#")) {
+		  setPrintText(secondOperand());
+	  }
+	  else {
+		  setPrintText(firstOperand()+operator+secondOperand());
+	  }
+	  System.out.println(getPrintText());
+	  processEvent(new ActionEvent(this, ActionEvent.NULL_SOURCE_TARGET));  
+  }
+  
   public void resultClicked() {
 		try {
 			addOperand(currentNumber);

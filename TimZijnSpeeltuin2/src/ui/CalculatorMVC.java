@@ -35,7 +35,7 @@ public class CalculatorMVC extends Application
 		
 		
 		CalculatorController calculatorController = new CalculatorController(calc);
-	    calculatorController.setStyle("-fx-background-color: blue;");
+	    calculatorController.setStyle("-fx-background-color: rgba(200,200,200,0.10);");
 		resultView = new ResultView();
 	    resultView.setStyle("-fx-background-color: black;");
 		mainPane.setCenter(calculatorController);

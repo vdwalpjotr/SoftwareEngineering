@@ -44,7 +44,7 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 		
 	private Button buttonReset;
 	private Button buttonResult;
-	//private ComboBox comboBoxBases;
+	private ComboBox comboBoxBases;
 	
 	//private ObservableList<String> baseList = new FXCollections.observableArrayList("Dec", "Oct", "Hex");
 	private ObservableList<Node> childrenList;
@@ -52,10 +52,13 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 	public CalculatorController(Calculator c) {
 		calc = c;
 		
-	//	comboBoxBases.getItems().addAll("Dec", "Oct", "Hex");
+		comboBoxBases = new ComboBox();
+		comboBoxBases.getItems().addAll("Dec", "Oct", "Hex");
+		comboBoxBases.setValue("Dec");
+		//comboBoxBases.setMaxWidth(60);;
 		
 		gridPane = new GridPane();
-				
+		
 		button0 = new Button("0");
 		button1 = new Button("1");
 		button2 = new Button("2");
@@ -101,7 +104,9 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 		
 		gridPane.add(buttonReset, 1, 5);
 		gridPane.add(buttonResult, 2, 5);
-	//	gridPane.add(comboBoxBases, 1, 6);
+		gridPane.add(comboBoxBases, 1, 6, 2, 1);
+		
+		comboBoxBases.setOnAction(this);
 		
 		childrenList = gridPane.getChildren();
 		for(Node child : childrenList) {
@@ -170,6 +175,11 @@ public class CalculatorController extends Pane implements EventHandler<ActionEve
 		}
 		else if(e.getSource() == buttonReset) {
 			
+		}
+		else if(e.getSource() == comboBoxBases) {
+			ComboBox c = (ComboBox)e.getSource();
+			calc.changeBase(c.getValue().toString());
+			System.out.println(c.getValue());
 		}
 	}
 }
