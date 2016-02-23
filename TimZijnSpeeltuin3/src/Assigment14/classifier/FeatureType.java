@@ -16,48 +16,36 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307  USA
  */
-package Assigment15.classifier;
+package Assigment14.classifier;
+
+import java.util.Collection;
+import java.util.TreeSet;
 
 /**
- * This class describes the name of a feature ("Airco") and the value of the
- * feature ("No"). The FeatureType describes the possible values this feature
- * can have.
+ * This class describes a set of possible values that are allowed for a feature.
+ * Examples: Yes/No, High/Low, 1/2/4, ...
  * 
- * @author J.Balje: added comments
+ * @author J.Balje - Added comments
  *
  */
-public class Feature {
+public class FeatureType {
 
+	private TreeSet<String> allowed = new TreeSet<String>();
 	private String name;
-	private String value;
-	private FeatureType type;
 
-	public String getName() {
-		return name;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String newValue) {
-		if (type.isAllowed(newValue)) {
-			value = newValue;
-		} else
-			throw new IllegalArgumentException("value '" + newValue + "' not valid for attribute " + name);
-	}
-
-	public Feature(String name, String value, FeatureType type) {
+	public FeatureType(String name, String[] allowedValues) {
 		this.name = name;
-		this.type = type;
-		setValue(value);
+		for (int i = 0; i < allowedValues.length; i++) {
+			allowed.add(allowedValues[i]);
+		}
 	}
 
-	public String toString() {
-		return name + "=" + value;
+	public boolean isAllowed(String value) {
+		return allowed.contains(value);
 	}
 
-	public FeatureType type() {
-		return type;
+	public Collection<String> allowedValues() {
+		return allowed;
 	}
+
 }

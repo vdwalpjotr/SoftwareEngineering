@@ -1,5 +1,5 @@
-package Assigment15.test;
-import Assigment15.classifier.*;
+package Assigment14.test;
+import Assigment14.classifier.*;
 import junit.framework.TestCase;
 
 

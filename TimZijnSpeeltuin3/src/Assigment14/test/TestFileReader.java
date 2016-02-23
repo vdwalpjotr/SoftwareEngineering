@@ -1,10 +1,11 @@
-package Assigment15.test;
+package Assigment14.test;
 import junit.framework.TestCase;
-import Assigment15.classifier.*;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+
+import Assigment14.classifier.*;
 
 public class TestFileReader extends TestCase {
 	private static final String RESULTS_FILE = "OptieText.txt";

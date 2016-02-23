@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307  USA
  */
-package Assigment15.classifier;
+package Assigment14.classifier;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package Assigment15.test;
+package Assigment14.test;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

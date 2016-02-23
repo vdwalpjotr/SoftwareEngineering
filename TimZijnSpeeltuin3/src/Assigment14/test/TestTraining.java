@@ -1,10 +1,9 @@
-package Assigment15.test;
+package Assigment14.test;
 import java.util.HashMap;
 import java.util.Map;
 
+import Assigment14.classifier.*;
 import junit.framework.TestCase;
-
-import Assigment15.classifier.*;
 
 public class TestTraining extends TestCase {
 
