@@ -8,7 +8,6 @@ public class TreeTravel {
 		
 		public void inOrder(Tree tree){
 			DefaultMutableTreeNode currentRoot = tree.getRoot();
-			while
 		}
 }
 
