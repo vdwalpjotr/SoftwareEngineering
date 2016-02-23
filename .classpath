@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="leertaak2Calculator/src"/>
+	<classpathentry kind="src" path="TestingGroundPjotre/src"/>
+	<classpathentry kind="src" path="TestPeter/src"/>
+	<classpathentry kind="src" path="TimZijnSpeeltuin/src"/>
+	<classpathentry kind="src" path="TimZijnSpeeltuin2/src"/>
+	<classpathentry kind="src" path="TimZijnSpeeltuin3/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="TestingGroundPjotre/bin"/>
+</classpath>
