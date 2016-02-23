@@ -41,7 +41,7 @@ public class Rational {
 		if(den==0){
 			System.out.println("Division by 0, enter a new operand");
 			numerator = 0.0;
-			denominator = 0.0;
+			denominator = 1.0;
 		}else{
 		denominator = den;
 		}

@@ -25,7 +25,7 @@ public class CalculatorMVC extends JApplet {
 	
 	public void init(){
 		resize(260, 220);
-		
+				
 		model = new Calculator();
 	
 		controller = new CalculatorController(model);
@@ -49,6 +49,8 @@ public class CalculatorMVC extends JApplet {
 		model.addActionListener(inputView);
 		model.addActionListener(antwoordView);
 		model.addActionListener(totaalBerekeningView);
+		
+		
 		
 	}
 
