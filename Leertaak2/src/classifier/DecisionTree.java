@@ -193,8 +193,9 @@ public class DecisionTree implements Classifier {
 		Iterator<Item> it=trainingsSet.keySet().iterator();
 		while(it.hasNext()){
 			Item item = it.next();
-			String splitValue = item.getFeatureValue(split);
+			String splitValue = item.getFeatureValue(split);	
 			Map<Item, String> partition = partitions.get(splitValue);
+			String test = trainingsSet.get(item);
 			partition.put(item,trainingsSet.get(item));
 		}
 		return partitions;

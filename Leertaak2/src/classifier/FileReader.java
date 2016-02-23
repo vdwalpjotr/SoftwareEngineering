@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 public class FileReader {
-
+	public FeatureType yn = new FeatureType("01"
+			,new String[]{"0","1"});
 	private Scanner input;
 	public FileReader(){}
 
@@ -19,24 +20,23 @@ public class FileReader {
 			System.out.println("file not found");
 		}
 		while(input.hasNext()){
-			map.put(input.next(), new FeatureType("01", new String[]{"1","0"}));
+			map.put(input.next(), yn);
 		}
 		return map;
 	}
 
 	public Map<Item, String> readTrainingSet(String pathToFile){
-		FeatureType yn = new FeatureType("YesNo"
-				,new String[]{"yes","no"});
+		
 
 		Feature[] features = new Feature[]
-				{ new Feature("Turbo","yes",yn),
-						new Feature("EnginPower","yes",yn),
-						new Feature("SportBumper","yes",yn),
-						new Feature("SportRing","yes",yn),
-						new Feature("CruisControll","yes",yn),
-						new Feature("ABS","yes",yn),
-						new Feature("AC","yes",yn),
-						new Feature("Metalic","yes",yn)
+				{ new Feature("Turbo","0",yn),
+						new Feature("EnginPower","0",yn),
+						new Feature("SportBumper","0",yn),
+						new Feature("SportRing","0",yn),
+						new Feature("CruisControll","0",yn),
+						new Feature("ABS","0",yn),
+						new Feature("AC","0",yn),
+						new Feature("Metalic","0",yn)
 				};
 
 		File file = new File(pathToFile);
@@ -59,25 +59,17 @@ public class FileReader {
 			count++;
 			String line = input.nextLine();
 			String[] stringarray = line.split(";");
-			if(stringarray.length == (totalFeatures +2)){
+			
 				Item item = new Item(stringarray[0], features);
 				for(int i=1; i<totalFeatures;i++){
-					if(stringarray[i].equals("0")){
-						item.setFeatureValue(features[i].getName(), "no");
-						if(stringarray[i].equals("1")){
-							item.setFeatureValue(features[i].getName(), "yes");
-						}
-					}
-					map.put(item, stringarray[stringarray.length-1]);
+						item.setFeatureValue(features[i].getName(), stringarray[i]);
+						
 				}
-			}
-		}
-		if(totalItems == (count)){
-			return map;
-		}else{
-			System.out.println("Error, number of lines not equal ");
+				item.getFeatureValue("AC");
+				map.put(item, stringarray[stringarray.length-1]);
+			
 		}
 
 
-		return null;}
+		return map;}
 }
