@@ -1,7 +1,5 @@
 package gui;
 
-import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
@@ -9,29 +7,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class questionnaireController extends Pane implements EventHandler<ActionEvent> {
 	private Pane currentPane;
 	
-	private FlowPane startPane;
-	private GridPane questionPane;
-	private FlowPane lastPane;
-	
 	private String[] questionList;
 	private int[] resultList;
 	
-	Button bStart;
-	Label l;
-	RadioButton rb1;
-	RadioButton rb2;
-	Button	b;
-	int currentQuestion;
+	private Button bStart;
+	private Label l;
+	private RadioButton rb1;
+	private RadioButton rb2;
+	private Button	b;
+	private int currentQuestion;
 	
 	public questionnaireController() {
 		currentQuestion = 0;
@@ -119,6 +110,14 @@ public class questionnaireController extends Pane implements EventHandler<Action
 		this.getChildren().clear();
 		this.getChildren().add(currentPane);
 	}
+	
+	private void throwAlert(String message) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Error");
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
 
 	public void handle(ActionEvent e) {
 		if(e.getSource() == bStart) {
@@ -144,11 +143,7 @@ public class questionnaireController extends Pane implements EventHandler<Action
 				nextQuestion();				
 			}
 			else {
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.setTitle("Error");
-				alert.setHeaderText(null);
-				alert.setContentText("Please select a option.");
-				alert.showAndWait();
+				throwAlert("Please select an option.");
 			}
 		}
 	}
