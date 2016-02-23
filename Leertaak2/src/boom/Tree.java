@@ -36,6 +36,7 @@ public class Tree {
 		parent.insert(child, 0);
 		child = new DefaultMutableTreeNode("regional_customer");
 		parent.insert(child, 1);
+		System.out.println(parent.getChildAt(1));
 	}
 	public static void main(String[] args){
 		Tree tree = new Tree();
