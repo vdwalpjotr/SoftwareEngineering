@@ -11,7 +11,7 @@ public class AllTests {
 		suite.addTestSuite(TestTraining.class);
 		suite.addTestSuite(TestTree.class);
 		suite.addTestSuite(TestItem.class);
-		suite.addTestSuite(TestClassifier.class);
+		suite.addTestSuite(TestClassifier2.class);
 		suite.addTestSuite(TestRepresentation.class);
 		//$JUnit-END$
 		return suite;
