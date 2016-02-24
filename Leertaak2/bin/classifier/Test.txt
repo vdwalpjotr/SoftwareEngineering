@@ -1,5 +1,9 @@
 Features;8
 Items;256
+Item41;1;1;0;1;0;0;1;1;Comfort
+Item42;1;1;0;1;0;0;1;1;Comfort
+Item45;1;1;0;1;0;0;1;1;Comfort
+Item43;1;1;0;1;0;0;1;1;Comfort
 Item1;1;1;1;1;1;1;1;1;Royal de luxe
 Item2;1;1;1;1;1;1;1;0;Royal de luxe
 Item3;1;1;1;1;1;1;0;1;Royal de luxe
@@ -16,7 +20,7 @@ Item13;1;1;1;1;0;0;1;1;Royal de luxe
 Item14;1;1;1;1;0;0;1;0;Royal de luxe
 Item15;1;1;1;1;0;0;0;1;Royal de luxe
 Item16;1;1;1;1;0;0;0;0;Royal de luxe
-Item17;1;1;1;0;1;1;1;1;Royal
+Item17;1;1;1;0;1;1;1;1;Royal 
 Item18;1;1;1;0;1;1;1;0;Royal
 Item19;1;1;1;0;1;1;0;1;Royal
 Item20;1;1;1;0;1;1;0;0;Royal

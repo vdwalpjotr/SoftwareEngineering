@@ -58,6 +58,7 @@ public class Item {
 
   public void setFeatureValue(String featureName, String newValue) {
 	Feature feature = (Feature) features.get(featureName);
+//	System.out.println("Naam: !"+feature.getName() + "!");
 	if(feature!=null){
 		feature.setValue(newValue);
 	}

@@ -37,11 +37,7 @@ public class DecisionTree implements Classifier {
 		root = tree;
 	}
 	
-	public static void main(String[] args){
-		FileReader reader = new FileReader();
-		System.out.println(System.getProperty("user.dir"));
-		buildDecisionTree(reader.readTrainingSet("src/classifier/Test.txt"), reader.readFeatures("src/classifier/OptiesText.txt")); 
-	}
+
 
 	/**
 	 * Assign a category to an item. This is the implementation of algorithm
@@ -106,7 +102,7 @@ public class DecisionTree implements Classifier {
 		//    Split the trainingsset into subsets. 
 		//    (in the car example you'd get a subset of all cars with airco=yes and
 		//     a subset of cars with airco=no)
-		Map<String, HashMap<Item, String>> partitions = performSplit(trainingsSet,splitFeature,splitType.allowedValues());
+		Map<String, HashMap<Item, String>> partitions = performSplit(trainingsSet,		splitFeature,				splitType.allowedValues());
 		for (Iterator<String> iter = partitions.keySet().iterator(); iter.hasNext();) {
 			String value = iter.next();		
 			//    a)  be ni the result of a recursive execution of this algorithm where

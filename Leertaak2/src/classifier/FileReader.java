@@ -1,52 +1,69 @@
 package classifier;
 
+import java.awt.List;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 public class FileReader {
-	public FeatureType yn = new FeatureType("01"
-			,new String[]{"0","1"});
+	
+	public FeatureType yn = new FeatureType("01" ,new String[]{"0","1"});
+	
 	private Scanner input;
-	public FileReader(){}
+	private DecisionTree tree;
+	private Feature[] featureNamen = new Feature[]
+			{ new Feature("Turbo","0",yn),
+					new Feature("EnginPower","0",yn),
+					new Feature("SportBumper","0",yn),
+					new Feature("SportRing","0",yn),
+					new Feature("CruisControll","0",yn),
+					new Feature("ABS","0",yn),
+					new Feature("AC","0",yn),
+					new Feature("Metalic","0",yn)
+			};
+	public FileReader(){
+		tree = new DecisionTree(readTrainingSet("src/classifier/Test.txt"), getMap());
+		System.out.println(tree.toString());
+	}
+	
+	public String getCategory(Item item){
+		return tree.assignCategory(item);
+	}
+	
 
-	public Map<String, FeatureType> readFeatures(String pathToFile){
-		java.io.File file = new java.io.File(pathToFile);
-		Map<String, FeatureType> map = new HashMap<String, FeatureType>();
-		try {
-			input = new Scanner(file);
-		} catch (FileNotFoundException e) {
-			System.out.println("file not found");
-		}
-		while(input.hasNext()){
-			map.put(input.next(), yn);
-		}
-		return map;
+	
+//	List<String> featureList = new ArrayList<>();
+//	featureList.add("Turbo");
+	
+	Map<String, FeatureType> mappie = new HashMap<String, FeatureType>();
+	
+	public Map<String, FeatureType> getMap(){
+		mappie.put("Turbo", yn);
+		mappie.put("EnginPower", yn);
+		mappie.put("SportBumper", yn);
+		mappie.put("SportRing", yn);
+		mappie.put("CruisControll", yn);
+		mappie.put("ABS", yn);
+		mappie.put("AC", yn);
+		mappie.put("Metalic", yn);
+		return mappie;
+
+
+
 	}
 
-	public Map<Item, String> readTrainingSet(String pathToFile){
-		
-
-		Feature[] features = new Feature[]
-				{ new Feature("Turbo","0",yn),
-						new Feature("EnginPower","0",yn),
-						new Feature("SportBumper","0",yn),
-						new Feature("SportRing","0",yn),
-						new Feature("CruisControll","0",yn),
-						new Feature("ABS","0",yn),
-						new Feature("AC","0",yn),
-						new Feature("Metalic","0",yn)
-				};
-
+	public HashMap<Item, String> readTrainingSet(String pathToFile){
 		File file = new File(pathToFile);
-		Map<Item, String> map = new HashMap<Item, String>();
+		HashMap<Item, String> map = new HashMap<Item, String>();
 		try{
 			input = new Scanner(file);
 		} catch(FileNotFoundException e){
 			System.out.println("File not found: "+pathToFile);
 			e.printStackTrace();
 		}
+
 		String firstLine=input.nextLine();
 		String[] totalFeat = firstLine.split(";");
 		String totalFeatures1 = totalFeat[1].trim();
@@ -59,17 +76,21 @@ public class FileReader {
 			count++;
 			String line = input.nextLine();
 			String[] stringarray = line.split(";");
+
+			//Item item = new Item(stringarray[0], features);
 			
-				Item item = new Item(stringarray[0], features);
-				for(int i=1; i<totalFeatures;i++){
-						item.setFeatureValue(features[i].getName(), stringarray[i]);
-						
-				}
-				item.getFeatureValue("AC");
-				map.put(item, stringarray[stringarray.length-1]);
+			String itemName = stringarray[0];
+			Feature features[] = new Feature[totalFeatures];
 			
+			for(int i=0; i<totalFeatures;i++){
+
+				features[i] = new Feature(featureNamen[i].getName(),stringarray[i+1], yn);
+
+				Item item = new Item("naam", features);
+
+			}
+			map.put(new Item(itemName, features), stringarray[stringarray.length-1]);
 		}
-
-
-		return map;}
+		return map;
+	}
 }
