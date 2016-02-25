@@ -40,6 +40,8 @@ public class questionnaireController extends Pane implements EventHandler<Action
 	private int prefHeight;
 	private int prefWidth;
 	
+	private int currentPaneQuestion = 0;
+	
 	public questionnaireController(int prefHeight, int prefWidth, FileReader fr) {
 		this.fr = fr;
 		this.prefHeight = prefHeight;
@@ -56,6 +58,7 @@ public class questionnaireController extends Pane implements EventHandler<Action
 	}
 	
 	private FlowPane getStartPane() {
+		currentPaneQuestion = 0;
 		FlowPane fp = new FlowPane();
 		fp.setPrefSize(prefHeight, prefWidth);
 		fp.setAlignment(Pos.CENTER);
@@ -71,6 +74,7 @@ public class questionnaireController extends Pane implements EventHandler<Action
 	}
 	
 	private VBox getQuestionPane() {
+		currentPaneQuestion = 1;
 		VBox gp = new VBox();
 		gp.setPrefSize(prefHeight, prefWidth);
 		gp.setAlignment(Pos.CENTER);
@@ -109,6 +113,7 @@ public class questionnaireController extends Pane implements EventHandler<Action
 	}
 	
 	private FlowPane getLastPane() {
+		currentPaneQuestion = 0;
 		FlowPane fp = new FlowPane(Orientation.VERTICAL);
 		fp.setPrefSize(prefHeight, prefWidth);
 		fp.setColumnHalignment(HPos.CENTER);
@@ -138,7 +143,6 @@ public class questionnaireController extends Pane implements EventHandler<Action
 			for(Feature f : ft) {
 				if(f.getValue().equals("1")) {
 					used = 1;
-					//fLijst += f.getName()+"\n";
 					Label lOption = new Label(f.getName());
 					fp.getChildren().add(lOption);
 				}
@@ -195,6 +199,21 @@ public class questionnaireController extends Pane implements EventHandler<Action
 		alert.setHeaderText(null);
 		alert.setContentText(message);
 		alert.showAndWait();
+	}
+	
+	public Alert getWindowAlert() {
+		if(this.currentPaneQuestion == 1) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Vroegtijdig afsluiten");
+			alert.setContentText("Het is volkomen begrijpelijk dat u alweer helemaal klaar bent met deze questionnaire, "
+					+ "maar wij kunnen het helaas niet toelaten dat u vroegtijdig afsluit.\n\n"
+					+ "Wij adviseren u dan ook om er nog even lekker voor te gaan zitten en er vooral ook van te genieten.");
+			return alert;			
+		}
+		else {
+			return null;
+		}
 	}
 
 	public void handle(ActionEvent e) {

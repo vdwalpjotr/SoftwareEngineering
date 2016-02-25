@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-public class treeGui extends Application implements EventHandler<ActionEvent> {
+public class treeGui extends Application implements EventHandler<WindowEvent> {
 		
 	private questionnaireController qc;
 	protected static int prefHeight = 300;
@@ -23,7 +25,7 @@ public class treeGui extends Application implements EventHandler<ActionEvent> {
 		primaryStage.setTitle("Car insurance");
 		primaryStage.show();
 		
-		//primaryStage.setOnCloseRequest(this);
+		primaryStage.setOnCloseRequest(this);
 		
 	}
 
@@ -31,9 +33,11 @@ public class treeGui extends Application implements EventHandler<ActionEvent> {
 		Application.launch(args);
 	}
 
-	@Override
-	public void handle(ActionEvent arg0) {
-		//Alert a = new Alert();
-		
+	public void handle(WindowEvent arg0) {
+		Alert alert = qc.getWindowAlert();
+		if(alert != null) {
+			alert.showAndWait();
+			arg0.consume();			
+		}
 	}
 }
