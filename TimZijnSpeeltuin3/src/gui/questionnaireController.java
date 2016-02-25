@@ -36,19 +36,15 @@ public class questionnaireController extends Pane implements EventHandler<Action
 	private RadioButton rb2;
 	private Button	b;
 	private int currentQuestion;
-	
-<<<<<<< HEAD
-	public questionnaireController(FileReader fr) {
-		this.fr = fr;
-=======
+
 	private int prefHeight;
 	private int prefWidth;
 	
-	public questionnaireController(int prefHeight, int prefWidth) {
+	public questionnaireController(int prefHeight, int prefWidth, FileReader fr) {
+		this.fr = fr;
 		this.prefHeight = prefHeight;
 		this.prefWidth = prefWidth;
 		
->>>>>>> origin/master
 		currentQuestion = 0;
 		questionList = getQuestionList();
 		resultList = new int[8];
@@ -119,36 +115,44 @@ public class questionnaireController extends Pane implements EventHandler<Action
 		fp.setAlignment(Pos.CENTER);
 				
 		Label lEnd = new Label("Thank you answering all the questions.");
+		Label lOptions = new Label();
+		Label lResultName = new Label("Het verzekeringstarief van uw auto is:");
 		Label lResult = new Label();
 		
-<<<<<<< HEAD
-		Feature[] ft = fr.fillFeatureList(resultList);
-		/*
-		for(Feature f : ft) {
-			
-			System.out.println(f.toString());
-		}
-		*/
+		Feature[] ft = fr.fillFeatureList(resultList);		
+		String fLijst = "Uw Auto heeft de volgende opties:\n";		
+		Item item = new Item("NewItem", ft);
 		
-		Item item = new Item("JeMoeder", ft);
-		//System.out.println(fr.getCategory(item));
-		/*
-=======
 		lEnd.setFont(new Font("Times new Roman", 15));
+		lResultName.setFont(new Font("Times new Roman", 15));
 		lResult.setFont(new Font("Times new Roman", 20));
-		lResult.setStyle("-fx-text-fill: red");		
+		lResult.setStyle("-fx-text-fill: red");
 		
->>>>>>> origin/master
-		String result = "Result: ";
-		for(int i : resultList) {
-			result = result+i;
-		}
-		*/
-		
+		lOptions.setText(fLijst);
 		lResult.setText(fr.getCategory(item));
 		
 		fp.getChildren().add(lEnd);
+		fp.getChildren().add(lOptions);
+		
+		int used = 0;
+			for(Feature f : ft) {
+				if(f.getValue().equals("1")) {
+					used = 1;
+					//fLijst += f.getName()+"\n";
+					Label lOption = new Label(f.getName());
+					fp.getChildren().add(lOption);
+				}
+			}			
+		if(used == 0) {
+			Label lOption = new Label("Uw auto heeft geen opties.");
+			fp.getChildren().add(lOption);			
+		}
+		
+		fp.getChildren().add(lResultName);
 		fp.getChildren().add(lResult);
+
+		FlowPane.setMargin(lEnd, new Insets(0, 0, 25, 0));
+		FlowPane.setMargin(lResultName, new Insets(25, 0, 0, 0));
 		
 		return fp;
 	}

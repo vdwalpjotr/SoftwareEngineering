@@ -15,14 +15,10 @@ public class treeGui extends Application implements EventHandler<ActionEvent> {
 	protected static int prefWidth = 300;
 	
 	public void start(Stage primaryStage) {
-<<<<<<< HEAD
 		FileReader fr = new FileReader();
-		qc = new questionnaireController(fr);
-		Scene scene = new Scene(qc, 250,250);
-=======
-		qc = new questionnaireController(prefHeight, prefWidth);
-		Scene scene = new Scene(qc, prefHeight,prefWidth);
->>>>>>> origin/master
+		
+		qc = new questionnaireController(prefHeight, prefWidth, fr);
+		Scene scene = new Scene(qc, prefHeight, prefWidth);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Car insurance");
 		primaryStage.show();
