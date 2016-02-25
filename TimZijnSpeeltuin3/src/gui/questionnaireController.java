@@ -1,5 +1,8 @@
 package gui;
 
+import classifier.Feature;
+import classifier.FileReader;
+import classifier.Item;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert.AlertType;
@@ -12,6 +15,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class questionnaireController extends Pane implements EventHandler<ActionEvent> {
+	private FileReader fr;
+	
 	private Pane currentPane;
 	
 	private String[] questionList;
@@ -24,7 +29,8 @@ public class questionnaireController extends Pane implements EventHandler<Action
 	private Button	b;
 	private int currentQuestion;
 	
-	public questionnaireController() {
+	public questionnaireController(FileReader fr) {
+		this.fr = fr;
 		currentQuestion = 0;
 		questionList = getQuestionList();
 		resultList = new int[8];
@@ -69,11 +75,25 @@ public class questionnaireController extends Pane implements EventHandler<Action
 		
 		Label lEnd = new Label("Thank you answering all the questions.");
 		Label lResult = new Label();
+		
+		Feature[] ft = fr.fillFeatureList(resultList);
+		/*
+		for(Feature f : ft) {
+			
+			System.out.println(f.toString());
+		}
+		*/
+		
+		Item item = new Item("JeMoeder", ft);
+		//System.out.println(fr.getCategory(item));
+		/*
 		String result = "Result: ";
 		for(int i : resultList) {
 			result = result+i;
 		}
-		lResult.setText(result);
+		*/
+		
+		lResult.setText(fr.getCategory(item));
 		
 		fp.getChildren().add(lEnd);
 		fp.getChildren().add(lResult);

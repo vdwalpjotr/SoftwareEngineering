@@ -25,11 +25,21 @@ public class FileReader {
 			};
 	public FileReader(){
 		tree = new DecisionTree(readTrainingSet("src/classifier/Test.txt"), getMap());
-		System.out.println(tree.toString());
+		//System.out.println(tree.toString());
 	}
 	
 	public String getCategory(Item item){
 		return tree.assignCategory(item);
+	}
+	
+	public Feature[] fillFeatureList(int[] resultList) {
+		Feature[] ft = featureNamen;
+		
+		for(int i = 0; i<ft.length; i++) {
+			ft[i].setValue(""+resultList[i]);
+		}
+		
+		return ft;
 	}
 	
 
