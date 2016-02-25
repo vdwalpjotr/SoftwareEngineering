@@ -24,8 +24,8 @@ public class FileReader {
 					new Feature("Metalic","0",yn)
 			};
 	public FileReader(){
-		tree = new DecisionTree(readTrainingSet("src/classifier/Test.txt"), getMap());
-		//System.out.println(tree.toString());
+		tree = new DecisionTree(readTrainingSet("src/classifier/TestIncompleet.txt"), getMap());
+		System.out.println(tree.toString());
 	}
 	
 	public String getCategory(Item item){
