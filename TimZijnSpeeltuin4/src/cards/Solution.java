@@ -129,14 +129,18 @@ public class Solution extends Stack<Candidate>
 	 * @return true if all checks are correct.
 	 */
 	// uses methods borderCard and mustBeAdjacent to
-	private boolean isCorrect(int index, char c) {
+	public boolean isCorrect() {
          //TODO
-		
-		char card = mustBeAdjacentTo(c);
-         return true;
-     }     
-            
-	
+         for(int i = 0; i<row.length; i++) {
+        	 Candidate c = board[row[i]][column[i]];
+        	 char mbat = mustBeAdjacentTo(c.getCardChar());
+        	 if((mbat != '?' && c != null) && (bordersCard(row[i], column[i], mbat))) {
+        		 return false;
+        	 }
+         }
+		 return true;
+     } 
+
 	/**
 	 * @return a representation of the solution on the board
 	 */

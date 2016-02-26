@@ -18,7 +18,7 @@ private Scanner    reader = new Scanner(System.in);
          if (solution.fits(candidates.get(index)))
          {
              solution.record(candidates.remove(index)); //move candidate to solution
-             if (solution.complete())
+             if (solution.complete() && solution.isCorrect())
              {
                  solution.show();
              }
@@ -35,7 +35,11 @@ private Scanner    reader = new Scanner(System.in);
     
     public static void main(String[] arg0) {
     	Problem p = new Problem();
+    	long startTime = System.nanoTime();
     	p.solve();
+    	long stopTime = System.nanoTime();
+    	
+    	System.out.println(stopTime - startTime);
     	
     	//p.solution.bordersCard(1, 2, 'A');
     }
