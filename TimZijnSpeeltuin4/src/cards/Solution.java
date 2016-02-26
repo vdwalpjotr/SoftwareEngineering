@@ -32,9 +32,41 @@ public class Solution extends Stack<Candidate>
 	 // @param row, column, candidate
 	 // @return Boolean indicating if cardChar is found.
 	 // can be used in the methods fits and isCorrect
-	private boolean bordersCard(int row, int column, char cardChar){
+	boolean bordersCard(int row, int column, char cardChar){
 	    //TODO
-		return true;
+		Candidate cTop = null;
+		Candidate cBottom = null;
+		Candidate cLeft = null;
+		Candidate cRight = null;
+
+		if(row > 0) {
+			cTop = board[row-1][column];			
+		}
+		if(row < board[0].length - 1) {			
+			cBottom = board[row+1][column];
+		}
+		if(column > 0) {
+			 cLeft = board[row][column-1];
+		}
+		if(column < board[0].length -1) {
+			cRight = board[row][column+1];			
+		}
+		
+		if(cRight != null && cRight.getCardChar() == cardChar) {
+			return false;
+		}
+		else if(cLeft != null && cLeft.getCardChar() == cardChar) {
+			return false;
+		}
+		else if(cTop != null && cTop.getCardChar() == cardChar) {
+			return false;
+		}
+		else if(cBottom != null && cBottom.getCardChar() == cardChar) {
+			return false;
+		}
+		else {
+			return true;
+		}
     }
 	
 	
@@ -47,7 +79,10 @@ public class Solution extends Stack<Candidate>
 	 */
 	public boolean fits(Candidate candidate){ 
 		//TODO
-	    return true;
+		int index = this.size();
+		
+	    return bordersCard(row[index], column[index], candidate.getCardChar());
+		//return true;
     }
 
 	public void record(Candidate candidate)
@@ -94,8 +129,10 @@ public class Solution extends Stack<Candidate>
 	 * @return true if all checks are correct.
 	 */
 	// uses methods borderCard and mustBeAdjacent to
-	private boolean isCorrect() {
+	private boolean isCorrect(int index, char c) {
          //TODO
+		
+		char card = mustBeAdjacentTo(c);
          return true;
      }     
             
@@ -105,7 +142,15 @@ public class Solution extends Stack<Candidate>
 	 */
      public String toString(){
 	    //TODO
-	    return "";
+    	 
+    	 String s = "";
+    	 s = s + "     " + "     " + board[0][2].toString() + "\n";
+    	 s = s + board[1][0].toString() + board[1][1].toString() + board[1][2] + "\n";
+    	 s = s + "     " + board[2][1].toString() + board[2][2].toString() + board[2][3].toString() + "\n";
+    	 s = s + "     " + "     " + board[3][2].toString() + "\n";
+    	 
+    	 
+	    return s;
 	}    
 
 }

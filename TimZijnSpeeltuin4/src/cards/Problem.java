@@ -36,6 +36,8 @@ private Scanner    reader = new Scanner(System.in);
     public static void main(String[] arg0) {
     	Problem p = new Problem();
     	p.solve();
+    	
+    	//p.solution.bordersCard(1, 2, 'A');
     }
 
 }
