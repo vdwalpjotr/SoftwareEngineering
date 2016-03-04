@@ -52,12 +52,22 @@ public class ChooseMoveTest extends TestCase {
 		
 
 		TicTacToe ttt2 = new TicTacToe();
-		assertEquals(0, ttt2.chooseMove());
 		
 		//Set player 1
-		ttt.playMove(0);
-		assertEquals(4, ttt2.chooseMove());
+		ttt2.playMove(0);
 		
+		//Set player 2
+		ttt2.playMove(4);
+		assertEquals(8, ttt2.chooseMove());
+		
+		//Set player 1
+		ttt2.playMove(8);
+		
+		//Set player 2
+		ttt2.playMove(2);
+		assertEquals(6, ttt2.chooseMove());	
+		
+		//Player 1 should always win in the next move
 		
 	}
 
