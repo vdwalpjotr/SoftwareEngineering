@@ -1,6 +1,7 @@
 package ttt;
 
 import junit.framework.TestCase;
+import ttt.TicTacToe.Best;
 
 public class ChooseMoveTest extends TestCase {
 	
@@ -9,12 +10,29 @@ public class ChooseMoveTest extends TestCase {
 	}
 	
 	public void test() {
+		Best best = null;
 		TicTacToe ttt = new TicTacToe();
-		assertEquals(0, ttt.chooseMove());
+		ttt.computerPlays();
+		ttt.playMove(0);
+		ttt.playMove(4);
+		ttt.playMove(8);
+		ttt.playMove(3);
+
+		best = ttt.chooseMove(0);
+		ttt.playMove(best.row*3+best.column);
 		
+		System.out.println("-----------\n"+ttt.toString()+"-----------\n");
+
+		best = ttt.chooseMove(0);
+		ttt.playMove(best.row*3+best.column);
+
+		System.out.println("-----------\n"+ttt.toString()+"-----------\n");
+		//assertEquals(0, ttt.chooseMove(1));
+		
+		/*
 		//Set player 1
 		ttt.playMove(0);
-		assertEquals(4, ttt.chooseMove());
+		assertEquals(4, ttt.chooseMove(0));
 		
 		//Set player 2
 		ttt.playMove(4);
@@ -68,7 +86,7 @@ public class ChooseMoveTest extends TestCase {
 		assertEquals(6, ttt2.chooseMove());	
 		
 		//Player 1 should always win in the next move
-		
+		*/
 	}
 
 }
