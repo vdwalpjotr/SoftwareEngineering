@@ -109,7 +109,7 @@ class TicTacToe {
 	public boolean boardIsFull() {
 		// TODO:
 		for(int cell = 0; cell < (board.length * board[0].length); cell++) {
-			if(board[cell/3][cell%3] == EMPTY) {
+			if(squareIsEmpty(cell/3, cell%3)) {
 				return false;
 			}
 		}
@@ -212,6 +212,10 @@ class TicTacToe {
 			val = v;
 			row = r;
 			column = c;
+		}
+		
+		public String toString() {
+			return ""+val;
 		}
 	}
 
