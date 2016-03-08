@@ -99,7 +99,7 @@ class TicTacToe {
 	}
 
 	// Simple supporting routines
-	private void clearBoard() {
+	void clearBoard() {
 		// TODO:
 		for(int i = 0; i < (board.length * board[0].length); i++) {
 			board[i / 3][i % 3] = 2;
