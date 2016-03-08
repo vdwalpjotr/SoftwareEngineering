@@ -13,20 +13,60 @@ public class ChooseMoveTest extends TestCase {
 		Best best = null;
 		TicTacToe ttt = new TicTacToe();
 		ttt.computerPlays();
-		ttt.playMove(0);
-		ttt.playMove(4);
-		ttt.playMove(8);
-		ttt.playMove(3);
+
+		best = ttt.chooseMove(1);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
 
 		best = ttt.chooseMove(0);
 		ttt.playMove(best.row*3+best.column);
 		
-		System.out.println("-----------\n"+ttt.toString()+"-----------\n");
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
+		best = ttt.chooseMove(1);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
 
 		best = ttt.chooseMove(0);
 		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
 
-		System.out.println("-----------\n"+ttt.toString()+"-----------\n");
+		best = ttt.chooseMove(1);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+		
+		/*
+		ttt.setHumanPlays();
+		int side = 1;
+	while(ttt.positionValue() == 2) {
+
+		best = ttt.chooseMove(side);
+		ttt.playMove(best.row*3+best.column);
+		if(side == 0) {
+			side++;
+		}
+		else {
+			side--;
+		}
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+		
+	}
+		
+		/*
+		ttt.computerPlays();
+		ttt.playMove(0);
+		ttt.playMove(4);
+
+		best = ttt.chooseMove(0);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
 		//assertEquals(0, ttt.chooseMove(1));
 		
 		/*

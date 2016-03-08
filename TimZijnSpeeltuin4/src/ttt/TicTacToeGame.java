@@ -85,7 +85,6 @@ class TicTacToe {
 					else {
 						place(row, column, side);
 						if(side == HUMAN) {
-							//value = COMPUTER_WIN;
 							reply = chooseMove(COMPUTER);
 
 							if(reply.val < value) {
@@ -95,7 +94,6 @@ class TicTacToe {
 							}
 						}
 						else if(side == COMPUTER) {
-							//value = HUMAN_WIN;
 							reply = chooseMove(HUMAN);
 
 							if(reply.val > value) {
@@ -110,7 +108,7 @@ class TicTacToe {
 			}
 		}
 
-
+		//System.out.println(value+","+ bestRow+","+ bestColumn);
 		return new Best(value, bestRow, bestColumn);
 	}
 
@@ -139,14 +137,14 @@ class TicTacToe {
 		}
 	}
 
-	private boolean boardIsFull() {
+	public boolean boardIsFull() {
 		// TODO:
-		if(this.board.length == 9) {
-			return true;
+		for(int cell = 0; cell < (board.length * board[0].length); cell++) {
+			if(board[cell/3][cell%3] == EMPTY) {
+				return false;
+			}
 		}
-		else {
-			return false;
-		}
+		return true;
 	}
 
 	// Returns whether 'side' has won in this position
@@ -178,14 +176,14 @@ class TicTacToe {
 	// Compute static value of current position (win, draw, etc.)
 	protected int positionValue() {
 		// TODO:
-		if(boardIsFull()) {
-			return DRAW;
-		}
-		else if(isAWin(HUMAN)) {
+		if(isAWin(HUMAN)) {
 			return HUMAN_WIN;
 		}
 		else if(isAWin(COMPUTER)) {
 			return COMPUTER_WIN;
+		}
+		else if(boardIsFull()) {
+			return DRAW;
 		}
 		else {
 			return UNCLEAR;
