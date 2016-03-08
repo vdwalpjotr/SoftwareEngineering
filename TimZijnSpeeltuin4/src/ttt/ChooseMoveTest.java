@@ -1,52 +1,132 @@
 package ttt;
 
-
-import org.junit.*;
 import junit.framework.TestCase;
-
-import ttt.Tui;
+import ttt.TicTacToe.Best;
 
 public class ChooseMoveTest extends TestCase {
+	
+	public ChooseMoveTest(String arg0) {
+		super(arg0);
+	}
+	
+	public void test() {
+		Best best = null;
+		TicTacToe ttt = new TicTacToe();
+		ttt.computerPlays();
 
- public ChooseMoveTest(String arg0) {
-  super(arg0);
- }
- 
- public void testPositionValue() {
-  TicTacToe game = new TicTacToe();
-  
-  // Start board
-  System.out.println(game.toString());
-  
-  // Player X plays move in grid 2
-  game.playMove(2);
-  System.out.println(game.toString());
-  
-  // Player O plays move in grid 6
-  game.playMove(6);
-  System.out.println(game.toString());
-  
-  // Player X plays move in grid 5
-  game.playMove(5);
-  System.out.println(game.toString());
-  
-  // Player O plays move in grid 4
-  game.playMove(4);
-  System.out.println(game.toString());
-  
-  // Player X plays move in grid 8
-  game.playMove(8);
-  System.out.println(game.toString());
-  
-  // Check out if player X has one. value must be true
-  System.out.println("Has player 0 won the game?: " + game.isAWin(0));
-  
-  
-  
-  game.clearBoard();
-  System.out.println("---------------NEW GAME--------------");
-  System.out.println(game.toString());
-  
- }
- 
+		best = ttt.chooseMove(1);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
+		best = ttt.chooseMove(0);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
+		best = ttt.chooseMove(1);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
+		best = ttt.chooseMove(0);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
+		best = ttt.chooseMove(1);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+		
+		/*
+		ttt.setHumanPlays();
+		int side = 1;
+	while(ttt.positionValue() == 2) {
+
+		best = ttt.chooseMove(side);
+		ttt.playMove(best.row*3+best.column);
+		if(side == 0) {
+			side++;
+		}
+		else {
+			side--;
+		}
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+		
+	}
+		
+		/*
+		ttt.computerPlays();
+		ttt.playMove(0);
+		ttt.playMove(4);
+
+		best = ttt.chooseMove(0);
+		ttt.playMove(best.row*3+best.column);
+		
+		System.out.println("////////\n"+ttt.toString()+"////////\n");
+
+		//assertEquals(0, ttt.chooseMove(1));
+		
+		/*
+		//Set player 1
+		ttt.playMove(0);
+		assertEquals(4, ttt.chooseMove(0));
+		
+		//Set player 2
+		ttt.playMove(4);
+		assertEquals(8, ttt.positionValue());
+
+		//Set player 1
+		ttt.playMove(8);
+		assertEquals(3, ttt.positionValue());
+
+		//Set player 2
+		ttt.playMove(3);
+		assertEquals(5, ttt.positionValue());
+
+		//Set player 1
+		ttt.playMove(5);
+		assertEquals(2, ttt.positionValue());
+
+		//Set player 2
+		ttt.playMove(2);
+		assertEquals(6, ttt.positionValue());
+
+		//Set player 1
+		ttt.playMove(6);
+		assertEquals(7, ttt.positionValue());
+
+		//Set player 2
+		ttt.playMove(7);
+		assertEquals(1, ttt.positionValue());
+		
+
+		//Set player 1
+		ttt.playMove(1);
+		
+		//Board full
+		
+
+		TicTacToe ttt2 = new TicTacToe();
+		
+		//Set player 1
+		ttt2.playMove(0);
+		
+		//Set player 2
+		ttt2.playMove(4);
+		assertEquals(8, ttt2.chooseMove());
+		
+		//Set player 1
+		ttt2.playMove(8);
+		
+		//Set player 2
+		ttt2.playMove(2);
+		assertEquals(6, ttt2.chooseMove());	
+		
+		//Player 1 should always win in the next move
+		*/
+	}
+
 }
