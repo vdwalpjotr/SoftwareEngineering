@@ -57,59 +57,28 @@ class TicTacToe {
 
 	// Find optimal move
 	public Best chooseMove(int side) {
-		int opp; // The other side
-		Best reply = null; // Opponent's best reply
-		int simpleEval; // Result of an immediate evaluation
-		int bestRow = 0;
-		int bestColumn = 0;
-		int value = 2;
-		int boardRows = board.length;
-		int boardColumns = board[0].length;
+		int opp = (side == COMPUTER ? HUMAN : COMPUTER); // The other side
+		Best reply = new Best(side == COMPUTER ? HUMAN_WIN : COMPUTER_WIN); // Opponent's best reply
 
-		if((simpleEval = positionValue()) != UNCLEAR) {
-			return new Best(simpleEval);
+		if(gameOver()) {
+			return new Best(positionValue());
 		}
 		// TODO: implementeren m.b.v. recursie/backtracking
-		else {
-			   if(side == HUMAN) {
-		            value = COMPUTER_WIN;
-		        }
-		        else {
-		            value = HUMAN_WIN;
-		        }
-			for(int row = 0; row < boardRows; row++) {
-				for(int column = 0; column < boardColumns; column++) {
-					if(!squareIsEmpty(row, column) || !moveOk((row *3) + column)) {
-						continue;
-					}
-					else {
-						place(row, column, side);
-						if(side == HUMAN) {
-							reply = chooseMove(COMPUTER);
-
-							if(reply.val < value) {
-								value = reply.val;
-								bestRow = row;
-								bestColumn = column;
-							}
-						}
-						else if(side == COMPUTER) {
-							reply = chooseMove(HUMAN);
-
-							if(reply.val > value) {
-								value = reply.val;
-								bestRow = row;
-								bestColumn = column;
-							}
-						}
-						place(row, column, EMPTY);
-					}
+		for(int place = 0; place < 9; place++) {
+			if(moveOk(place)) {
+				place(place/3, place%3, side);
+				Best turn = chooseMove(opp);
+				if(side == COMPUTER ? reply.val < turn.val : reply.val > turn.val) {
+					reply.val = turn.val;
+					reply.row = place/3;
+					reply.column = place%3;
 				}
+				place(place/3, place%3, EMPTY);
 			}
 		}
 
 		//System.out.println(value+","+ bestRow+","+ bestColumn);
-		return new Best(value, bestRow, bestColumn);
+		return reply;
 	}
 
 	// check if move ok
@@ -132,7 +101,7 @@ class TicTacToe {
 	// Simple supporting routines
 	private void clearBoard() {
 		// TODO:
-		for(int i = 0; i < (board.length * board.length); i++) {
+		for(int i = 0; i < (board.length * board[0].length); i++) {
 			board[i / 3][i % 3] = 2;
 		}
 	}
