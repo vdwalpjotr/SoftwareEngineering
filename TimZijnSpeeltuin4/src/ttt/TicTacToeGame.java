@@ -50,66 +50,88 @@ class TicTacToe {
 	}
 
 	public int chooseMove() {
-		// Best best=chooseMove(COMPUTER);
-		// return best.row*3+best.column;
-		return 0;
+		Best best=chooseMove(COMPUTER);
+		return best.row*3+best.column;
+		//return 0;
 	}
 
 	// Find optimal move
-	private Best chooseMove(int side) {
-		int opp; // The other side
-		Best reply; // Opponent's best reply
-		int simpleEval; // Result of an immediate evaluation
-		int bestRow = 0;
-		int bestColumn = 0;
-		int value;
+	public Best chooseMove(int side) {
+		int opp = (side == COMPUTER ? HUMAN : COMPUTER); // The other side
+		Best reply = new Best(side == COMPUTER ? HUMAN_WIN : COMPUTER_WIN); // Opponent's best reply
 
-		if((simpleEval = positionValue()) != UNCLEAR)
-			return new Best(simpleEval);
-
+		if(gameOver()) {
+			return new Best(positionValue());
+		}
 		// TODO: implementeren m.b.v. recursie/backtracking
+		for(int place = 0; place < 9; place++) {
+			if(moveOk(place)) {
+				place(place/3, place%3, side);
+				Best turn = chooseMove(opp);
+				if(side == COMPUTER ? reply.val < turn.val : reply.val > turn.val) {
+					reply.val = turn.val;
+					reply.row = place/3;
+					reply.column = place%3;
+				}
+				place(place/3, place%3, EMPTY);
+			}
+		}
 
-		return null;
+		//System.out.println(value+","+ bestRow+","+ bestColumn);
+		return reply;
 	}
 
 	// check if move ok
 	public boolean moveOk(int move) {
-		// return ( move>=0 && move <=8 && board[move/3 ][ move%3 ] == EMPTY );
-		return true;
+		return ( move>=0 && move <=8 && board[move/3 ][ move%3 ] == EMPTY );
+		//return true;
 	}
 
 	// play move
 	public void playMove(int move) {
 		board[move / 3][move % 3] = this.side;
-		if(side == COMPUTER)
+		if(side == COMPUTER) {
 			this.side = HUMAN;
-		else
+		}
+		else {
 			this.side = COMPUTER;
+		}
 	}
 
 	// Simple supporting routines
-	private void clearBoard() {
+	void clearBoard() {
 		// TODO:
-		this.board = new int[3][3];
+		for(int i = 0; i < (board.length * board[0].length); i++) {
+			board[i / 3][i % 3] = 2;
+		}
 	}
 
-	private boolean boardIsFull() {
+	public boolean boardIsFull() {
 		// TODO:
-		if(this.board.length == 9) {
-			return true;
+		for(int cell = 0; cell < (board.length * board[0].length); cell++) {
+			if(board[cell/3][cell%3] == EMPTY) {
+				return false;
+			}
 		}
-		else {
-			return false;
-		}
+		return true;
 	}
 
 	// Returns whether 'side' has won in this position
-	protected boolean isAWin( int side )
-	{
-	    //TODO:
-		//if()
-	    return true;
-    }
+	protected boolean isAWin(int side) {
+		// TODO:
+		int[][] possibilities = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8},
+				{2, 4, 6}};
+		for(int[] possibility : possibilities) {
+			int pos1 = board[possibility[0] / 3][possibility[0] % 3];
+			int pos2 = board[possibility[1] / 3][possibility[1] % 3];
+			int pos3 = board[possibility[2] / 3][possibility[2] % 3];
+			if(pos1 == side && pos2 == side && pos3 == side) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	// Play a move, possibly clearing a square
 	private void place(int row, int column, int piece) {
@@ -123,14 +145,14 @@ class TicTacToe {
 	// Compute static value of current position (win, draw, etc.)
 	protected int positionValue() {
 		// TODO:
-		if(boardIsFull()) {
-			return DRAW;
-		}
-		else if(isAWin(HUMAN)) {
+		if(isAWin(HUMAN)) {
 			return HUMAN_WIN;
 		}
 		else if(isAWin(COMPUTER)) {
 			return COMPUTER_WIN;
+		}
+		else if(boardIsFull()) {
+			return DRAW;
 		}
 		else {
 			return UNCLEAR;
@@ -141,22 +163,23 @@ class TicTacToe {
 		// TODO:
 		String returnString = "";
 
-		for(int row[] : board) {
-			for(int column : row) {
-				if(column == EMPTY) {
-					returnString += " ";
-				}
-				else if(column == HUMAN){
-					returnString += humanChar;
-				}
-				else if(column == COMPUTER) {
-					returnString += computerChar;
-				}
+		for(int i = 0; i < (board.length * board.length); i++) {
+			int number = board[i / 3][i % 3];
+			if(number == EMPTY) {
+				returnString += "-";
 			}
-			returnString += "\n";
+			else if(number == HUMAN) {
+				returnString += humanChar;
+			}
+			else if(number == COMPUTER) {
+				returnString += computerChar;
+			}
+			if(i % 3 == 2) {
+				returnString += "\n";
+			}
 		}
 		return returnString;
-		//return "...\n...\n...\n";
+		// return "...\n...\n...\n";
 	}
 
 	public boolean gameOver() {
@@ -165,15 +188,18 @@ class TicTacToe {
 	}
 
 	public String winner() {
-		if(this.position == COMPUTER_WIN)
+		if(this.position == COMPUTER_WIN) {
 			return "computer";
-		else if(this.position == HUMAN_WIN)
+		}
+		else if(this.position == HUMAN_WIN) {
 			return "human";
-		else
+		}
+		else {
 			return "nobody";
+		}
 	}
 
-	private class Best {
+	public class Best {
 		int row;
 		int column;
 		int val;
