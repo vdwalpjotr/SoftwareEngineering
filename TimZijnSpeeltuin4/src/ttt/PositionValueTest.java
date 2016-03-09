@@ -9,12 +9,7 @@ public class PositionValueTest extends TestCase {
 	}
 	
 	public void test() {
-		TicTacToe ttt = new TicTacToe();		
-		assertEquals(2, ttt.positionValue());
-		
-		ttt.playMove(0);
-		assertEquals(2, ttt.positionValue());
-
+		//The board is full so it will be a draw.
 		TicTacToe ttt1 = new TicTacToe();
 		ttt1.setHumanPlays();
 		
@@ -31,6 +26,7 @@ public class PositionValueTest extends TestCase {
 		
 		assertEquals(1, ttt1.positionValue());
 		
+		//Human has a winning result.
 		TicTacToe ttt2 = new TicTacToe();
 		ttt2.setHumanPlays();
 		
@@ -41,7 +37,7 @@ public class PositionValueTest extends TestCase {
 		ttt2.playMove(6);
 		assertEquals(0, ttt2.positionValue());
 		
-		
+		//Computer has a winning result.
 		TicTacToe ttt3 = new TicTacToe();
 		ttt3.setComputerPlays();
 
@@ -49,8 +45,15 @@ public class PositionValueTest extends TestCase {
 		ttt3.playMove(1);
 		ttt3.playMove(3);
 		ttt3.playMove(2);
-		ttt3.playMove(6);;
+		ttt3.playMove(6);
 		assertEquals(3, ttt3.positionValue());
+		
+		//If the board is not done and there is no result.
+		TicTacToe ttt = new TicTacToe();		
+		assertEquals(2, ttt.positionValue());
+		
+		ttt.playMove(0);
+		assertEquals(2, ttt.positionValue());
 		
 	}
 

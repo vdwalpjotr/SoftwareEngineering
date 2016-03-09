@@ -4,21 +4,21 @@ import java.util.Arrays;
 public class RecursiveSolver implements Solver {
 	public boolean solve( int[] numbers, int sum)
 	{
+		//basecases
 		if(sum == 0){
-			return true;
+			return true; 
 		}
-		int sumOfNumbers = 0;
-		while(numbers.length > 0){
-			for(int i=0; i<numbers.length; i++){
-				sumOfNumbers += numbers[i];
-			}
-			if(sumOfNumbers == sum){
-				return true;
-			}
-			solve(Arrays.copyOf(numbers, numbers.length-1), sum);
+		if(numbers.length == 0) {
+			return false;
 		}
 		
-		return false;
+		if(numbers[numbers.length -1] > sum){
+			return solve(Arrays.copyOf(numbers,  numbers.length-1), sum);
+		}
+		int[] subSet = Arrays.copyOf(numbers, numbers.length-1);
+		return solve(subSet, sum-numbers[numbers.length-1]) || solve(subSet, sum);
 	}
 
 }
+
+
