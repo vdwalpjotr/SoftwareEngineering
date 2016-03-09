@@ -45,10 +45,16 @@ public class BottomUpSolver implements Solver {
 					
 				}
 			}
+			if(matrix[row][sum] == true){
+		
+				return true;
+			}
 			row++;
+
+
 }
 
-//		Print matrix
+//		
 //		for(int i=0; i<numbers.length;i++){
 //			for(int j=0; j<sum+1; j++){
 //				System.out.print(matrix[i][j]+"|");
@@ -56,7 +62,6 @@ public class BottomUpSolver implements Solver {
 //			System.out.print("\n");
 //
 //		}
-
 		return false;
 	}
 }
