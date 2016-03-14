@@ -26,6 +26,7 @@ import model.virtualmap.OccupancyMap;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.File;
 
 
 /**
@@ -110,6 +111,9 @@ public class MainFrame extends JFrame {
 		this.setTitle("Mobile Robot Explorer V2.0 ~ by Dustin Meijer & Alexander Jeurissen (2012), based on Davide Brugali (2002)");
 		this.setVisible(true);
 
+
+		environment.loadMap(new File("C:/Users/timzi/Desktop/SoftwareEngineering/TimZijnSpeeltuin5/MapZonderSonarTest.xml"));
+		
 	}
 
 	/**
