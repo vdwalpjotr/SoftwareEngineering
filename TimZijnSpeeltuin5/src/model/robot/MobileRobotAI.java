@@ -67,7 +67,19 @@ public class MobileRobotAI implements Runnable {
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
 
-				robot.sendCommand("P1.MOVEBW 60");
+				
+				for(int i = 0; i< measures.length; i++) {
+					if(measures[i] == 100) {
+						for(int y = 0; y < 10; y++) {
+							if(measures[i + y] != 100) {
+								continue;
+							}
+						}
+						System.out.println("position: "+ i);
+					}
+				}
+				/*
+				robot.sendCommand("P1.ROTATELEFT 90");
 				result = input.readLine();
 
 				robot.sendCommand("R1.GETPOS");
@@ -192,6 +204,7 @@ public class MobileRobotAI implements Runnable {
 				result = input.readLine();
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
+				*/
 				this.running = false;
 			} catch (IOException ioe) {
 				System.err.println("execution stopped");
