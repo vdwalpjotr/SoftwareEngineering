@@ -82,100 +82,76 @@ public class MobileRobotAI implements Runnable {
                 double forward = measures[0];
                 double right = measures[90];
                 double southEast = measures[105];
+                double northEast = measures[45];
+                double left = measures[270];
+                double south = measures[180];
 
                 System.out.println("Right:" + right);
-                System.out.println("southEast: " + southEast);
+                //System.out.println("southEast: " + southEast);
                 System.out.println("Forward: " + forward);
+                //System.out.println("Left: " + left);
 
                 if(right < 100){
+                	if(northEast < 30) {
 
-                    if(forward < 30){
-                        // 45 graden naar links
-                        robot.sendCommand("P1.ROTATELEFT 45");
+                        // rotate 90 links
+                        robot.sendCommand("P1.ROTATELEFT 90");
                         result = input.readLine();
-
-                        // 10 forward
-                        robot.sendCommand("P1.MOVEFW 5");
-                        result = input.readLine();
-
-                        // 45 graden naar links
-                        robot.sendCommand("P1.ROTATELEFT 45");
-                        result = input.readLine();
-                        turning = true;
-                    }
-                    if(!turning && !turnedRight && right > 30){
-                        // TODO: Deze kan subtielier
-
-                    	
-
+                		
+                	}
+                	if(right > 35) {
                         // rotate 90 naar rechts
                         robot.sendCommand("P1.ROTATERIGHT 90");
                         result = input.readLine();
-
+                        
                         // movefw 20
-                        robot.sendCommand("P1.MOVEFW 10");
+                        robot.sendCommand("P1.MOVEFW "+ (right-35));
                         result = input.readLine();
 
                         // rotate 90 links
                         robot.sendCommand("P1.ROTATELEFT 90");
                         result = input.readLine();
-                    }
-                    if(right < 20 ){
-                        // TODO: deze met 1 schijne lijn doen
-                        for (int i = 0; i < 9; i++) {
-
-                            // rotate 90 naar links
-                            robot.sendCommand("P1.ROTATELEFT 10");
-                            result = input.readLine();
-                            // movefw 20
-                            robot.sendCommand("P1.MOVEFW 2");
-                            result = input.readLine();
-
-                            // rotate 90 right
-                            robot.sendCommand("P1.ROTATERIGHT 10");
-                            result = input.readLine();
-                        }
 
 
-                    }
+                        turning = true;
+                	}
+                	else if(forward < 30) {
+                        // rotate 90 links
+                        robot.sendCommand("P1.ROTATELEFT 90");
+                        result = input.readLine();
+                	}
+                	else if(forward > 30 && !turning) {
+                        // movefw 20
+                        robot.sendCommand("P1.MOVEFW "+ (10));
+                        result = input.readLine();                		
+                	}
 
-                    robot.sendCommand("P1.MOVEFW 10");
+                    turning = false;
+                }
+                else if(southEast < 50) {
+                	
+                }
+                else if(southEast < 100) {
+                    // rotate 90 naar rechts
+                    robot.sendCommand("P1.ROTATERIGHT 90");
                     result = input.readLine();
-
-                    turnedRight = false;
-                } else {
-                    // draai 90 rechts
-                    robot.sendCommand("P1.ROTATERIGHT 45");
+                    
+                    // movefw 20
+                    robot.sendCommand("P1.MOVEFW "+ (5));
                     result = input.readLine();
-
-                    robot.sendCommand("P1.MOVEFW 10");
-                    result = input.readLine();
-
-                    robot.sendCommand("P1.ROTATELEFT 45");
-                    result = input.readLine();
-
-                    robot.sendCommand("P1.MOVEFW 10");
-                    result = input.readLine();
-
-                    robot.sendCommand("P1.ROTATERIGHT 45");
-                    result = input.readLine();
-
-                    robot.sendCommand("P1.MOVEFW 10");
-                    result = input.readLine();
-
-                    robot.sendCommand("P1.ROTATERIGHT 45");
-                    result = input.readLine();
-
-                    robot.sendCommand("P1.MOVEFW 10");
-                    result = input.readLine();
-
-
-                    turnedRight = true; // Na een rechterturn
-                    // moet hij niet meer proberen dichterbij de kant te gaan
-                    // stukje naar voren
-                    robot.sendCommand("P1.MOVEFW 10");
-                    result = input.readLine();
-
+                    
+                    // rotate 90 naar left
+                    robot.sendCommand("P1.ROTATELEFT 90");
+                    result = input.readLine();    
+                    
+                    // movefw 20
+                    robot.sendCommand("P1.MOVEFW "+ (5));
+                    result = input.readLine();           
+                }
+                else if(southEast == 100) {
+                    // rotate 90 naar rechts
+                    robot.sendCommand("P1.ROTATERIGHT 90");
+                    result = input.readLine();     	
                 }
                 updatePosition();
                 stepCount++;
