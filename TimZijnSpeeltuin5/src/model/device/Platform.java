@@ -7,7 +7,7 @@ import model.robot.MobileRobot;
 import java.awt.event.ActionEvent;
 
 /**
- * Title    :   The Mobile Robot Explorer Simulation Environment v2.0
+ * Title    :   e Mobile Robot Explorer Simulation Environment v2.0
  * Copyright:   GNU General Public License as published by the Free Software Foundation
  * Company  :   Hanze University of Applied Sciences
  *

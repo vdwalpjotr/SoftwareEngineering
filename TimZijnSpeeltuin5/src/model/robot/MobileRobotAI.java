@@ -25,6 +25,7 @@ public class MobileRobotAI implements Runnable {
 
 	private double position[] = new double[3];
 	private double measures[] = new double[360];
+	private double measuresSonar[] = new double[360];
 
 	private int stepCount;
 
@@ -75,16 +76,24 @@ public class MobileRobotAI implements Runnable {
 
 				// Search for wall
 				robot.sendCommand("L1.SCAN");
+				
 				result = input.readLine();
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
+				robot.sendCommand("S1.SCAN");
+				result = input.readLine();
+				parseMeasures(result, measuresSonar);
+				map.drawLaserScan(position, measuresSonar);
 
 				// Check positions
 				double forward = measures[0];
 				double right = measures[90];
+				
+				double forwardSonar = measuresSonar[0];
+				double rightSonar = measuresSonar[90];
 
-//				System.out.println("Forward: " + forward);
-//				System.out.println("Right:" + right);
+				System.out.println("Forward: " + forwardSonar);
+				System.out.println("Right:" + rightSonar);
 
 				// If wall is near
 				if(right < 50) {
@@ -111,7 +120,7 @@ public class MobileRobotAI implements Runnable {
 						if(measures[0] < 25) {
 							turn = false;
 							
-							running = false;
+							//running = false;
 							break;
 						}
 						
@@ -199,20 +208,22 @@ public class MobileRobotAI implements Runnable {
 		}
 		if(value.length() >= 5) {
 			value = value.substring(5); // removes the "SCAN " keyword
-
+			System.out.println(value);
 			StringTokenizer tokenizer = new StringTokenizer(value, " ");
 
 			double distance;
 			int direction;
+			
 			while(tokenizer.hasMoreTokens()) {
 				distance = Double.parseDouble(tokenizer.nextToken().substring(2));
 				direction = (int) Math.round(Math.toDegrees(Double.parseDouble(tokenizer.nextToken().substring(2))));
+				
 				if(direction == 360) {
 					direction = 0;
 				}
 				measures[direction] = distance;
 				// Printing out all the degrees and what it encountered.
-				// System.out.println("direction = " + direction + " distance =
+				 System.out.println("direction = " + direction + " distance = "+distance);
 				// " + distance);
 			}
 		}

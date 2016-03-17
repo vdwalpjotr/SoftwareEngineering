@@ -14,7 +14,7 @@ package model.device;
 // Dustin :
 // This class can be made default so it's only visible for in the package,
 // however the discussion remains if default is really a good visibility modifier to apply.
-// This was a private inner class, so atleast this is a step forward.
+// This was a private inner class, so at least this is a step forward.
 public class LaserMeasurement {
 
 	protected double distance;
