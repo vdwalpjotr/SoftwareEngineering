@@ -78,44 +78,82 @@ public class MobileRobotAI implements Runnable {
 				result = input.readLine();
 				parseMeasures(result, measures);
 				map.drawLaserScan(position, measures);
-				
-				//Check positions
+
+				// Check positions
 				double forward = measures[0];
 				double right = measures[90];
 
-				//System.out.println("Forward: " + forward);
-				//System.out.println("Right:" + right);
-				
-				//If wall is near
+//				System.out.println("Forward: " + forward);
+//				System.out.println("Right:" + right);
+
+				// If wall is near
 				if(right < 50) {
-					//If wall is to far
-					if(forward > 15.0) {
+					// If wall is to far
+					if(forward > 50.0) {
+						robot.sendCommand("P1.MOVEFW " + (forward - 50));
+						result = input.readLine();
+					}
+					else if(forward > 15.0) {
 						robot.sendCommand("P1.MOVEFW " + Math.min((forward - 15.0), 20.0));
 						result = input.readLine();
 					}
-					//If near wall
+					// If near wall
 					else {
 						robot.sendCommand("P1.ROTATELEFT 90");
 						result = input.readLine();
 					}
 				}
-				//If wall is to far or gone
+				// If wall is to far or gone
 				else {
-					robot.sendCommand("P1.MOVEFW " + (41.0));
-					result = input.readLine();
+					boolean turn = true;
+					System.out.println("forward: " + forward);
+					while(measures[125] < 78.0) {						
+						if(measures[0] < 25) {
+							turn = false;
+							
+							running = false;
+							break;
+						}
+						
+						robot.sendCommand("P1.MOVEFW " + 10);
+						result = input.readLine();
 
-					robot.sendCommand("P1.ROTATERIGHT 90");
+						// Search for wall
+						robot.sendCommand("L1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measures);
+					}
+					if(turn == true) {
+						robot.sendCommand("P1.ROTATERIGHT 90");
+						result = input.readLine();						
+					}
+
+					// Search for wall
+					robot.sendCommand("L1.SCAN");
 					result = input.readLine();
-					
-					robot.sendCommand("P1.MOVEFW " + (41.0));
-					result = input.readLine();
+					parseMeasures(result, measures);
+
+					while(measures[90] > 50) {
+						if(measures[0] < 25) {
+							running = false;
+							break;
+						}
+						
+						robot.sendCommand("P1.MOVEFW " + 10);
+						result = input.readLine();
+
+						// Search for wall
+						robot.sendCommand("L1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measures);
+					}
 				}
-				
-				//If near starting position after minimal 10 steps park;
+
+				// If near starting position after minimal 10 steps park;
 				if(stepCount > MAX_STEP_COUNT && Math.abs(position[0] - startPosition[0]) < 30
 						&& Math.abs(position[1] - startPosition[1]) < 30) {
 					System.out.println("Done exploring");
-					
+
 					robot.sendCommand("P1.ROTATELEFT 90");
 					result = input.readLine();
 
