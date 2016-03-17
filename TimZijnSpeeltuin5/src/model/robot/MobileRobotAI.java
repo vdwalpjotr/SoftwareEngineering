@@ -119,8 +119,9 @@ public class MobileRobotAI implements Runnable {
 					System.out.println("linenumber : 117");
 					boolean turn = true;
 					System.out.println("forward: " + forward);
-					while(measures[125] < 78.0) {						
-						if(measures[0] < 25) {
+					while(measures[125] < 78.0 || measuresSonar[125] < 78.0) {
+						System.out.println("Swek");
+						if(measures[0] < 25 || measuresSonar[5] <25) {
 							turn = false;
 							
 							//running = false;
@@ -148,13 +149,18 @@ public class MobileRobotAI implements Runnable {
 					robot.sendCommand("L1.SCAN");
 					result = input.readLine();
 					parseMeasures(result, measures);
+					
 
-					while(measures[90] > 50) {
-						if(measures[0] < 25) {
+					robot.sendCommand("S1.SCAN");
+					result = input.readLine();
+					parseMeasures(result, measuresSonar);
+
+					while(measures[90] > 50 && measuresSonar[90] > 50) {
+						if(measures[0] < 25 || measuresSonar[5] < 25) {
 							running = false;
 							break;
 						}
-						
+						System.out.println("163");
 						robot.sendCommand("P1.MOVEFW " + 10);
 						result = input.readLine();
 
@@ -162,6 +168,11 @@ public class MobileRobotAI implements Runnable {
 						robot.sendCommand("L1.SCAN");
 						result = input.readLine();
 						parseMeasures(result, measures);
+						System.out.println(measures[90]);
+						robot.sendCommand("S1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measuresSonar); 
+						System.out.println(measuresSonar[90]);
 					}
 				}
 
