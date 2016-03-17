@@ -157,10 +157,10 @@ public class OccupancyMap {
 
 		if (xi < 0 || yj < 0 || xi >= MAP_WIDTH / CELL_DIMENSION || yj >= MAP_HEIGHT / CELL_DIMENSION)
 			return;
-
+		
 		if (obstacle) {
 			grid[xi][yj] = OBSTACLE;
-		} else if (grid[xi][yj] != OBSTACLE) {
+		} else if (grid[xi][yj] != OBSTACLE  ) {
 			grid[xi][yj] = EMPTY;
 		}
 

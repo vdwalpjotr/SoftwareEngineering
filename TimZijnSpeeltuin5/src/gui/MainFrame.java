@@ -112,7 +112,7 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 
 
-		environment.loadMap(new File("MapZonderSonarTest.xml"));
+		environment.loadMap(new File("MapMetSonarTest.xml"));
 		
 	}
 

@@ -89,21 +89,23 @@ public class MobileRobotAI implements Runnable {
 				double forward = measures[0];
 				double right = measures[90];
 				
-				double forwardSonar = measuresSonar[0];
+				double forwardSonar = measuresSonar[10];
 				double rightSonar = measuresSonar[90];
 
 				System.out.println("Forward: " + forwardSonar);
 				System.out.println("Right:" + rightSonar);
 
 				// If wall is near
-				if(right < 50) {
+				if(right < 50 || rightSonar <50) {
 					// If wall is to far
-					if(forward > 50.0) {
-						robot.sendCommand("P1.MOVEFW " + (forward - 50));
+					if(forward > 50.0 && forwardSonar > 50.0) {
+						System.out.println("move 50");
+						robot.sendCommand("P1.MOVEFW " + Math.min((forward - 50), (forwardSonar - 50)));
 						result = input.readLine();
 					}
-					else if(forward > 15.0) {
-						robot.sendCommand("P1.MOVEFW " + Math.min((forward - 15.0), 20.0));
+					else if(forward > 15.0 && forwardSonar > 15.0) {
+						System.out.println("move less");
+						robot.sendCommand("P1.MOVEFW " + Math.min((forward - 15.0), (forwardSonar - 15.0)));
 						result = input.readLine();
 					}
 					// If near wall
@@ -114,6 +116,7 @@ public class MobileRobotAI implements Runnable {
 				}
 				// If wall is to far or gone
 				else {
+					System.out.println("linenumber : 117");
 					boolean turn = true;
 					System.out.println("forward: " + forward);
 					while(measures[125] < 78.0) {						
@@ -131,6 +134,10 @@ public class MobileRobotAI implements Runnable {
 						robot.sendCommand("L1.SCAN");
 						result = input.readLine();
 						parseMeasures(result, measures);
+						
+						robot.sendCommand("S1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measuresSonar);
 					}
 					if(turn == true) {
 						robot.sendCommand("P1.ROTATERIGHT 90");
@@ -208,7 +215,7 @@ public class MobileRobotAI implements Runnable {
 		}
 		if(value.length() >= 5) {
 			value = value.substring(5); // removes the "SCAN " keyword
-			System.out.println(value);
+			//System.out.println(value);
 			StringTokenizer tokenizer = new StringTokenizer(value, " ");
 
 			double distance;
@@ -223,7 +230,7 @@ public class MobileRobotAI implements Runnable {
 				}
 				measures[direction] = distance;
 				// Printing out all the degrees and what it encountered.
-				 System.out.println("direction = " + direction + " distance = "+distance);
+				 //System.out.println("direction = " + direction + " distance = "+distance);
 				// " + distance);
 			}
 		}
