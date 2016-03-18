@@ -46,6 +46,7 @@ public class Laser extends Device {
 	private LaserMeasurement detectMeasure;
 	private final ArrayList<LaserMeasurement> scanMeasurements;
 
+	
 	public Laser(String name, MobileRobot robot, Position localPos, Environment environment) {
 		super(name, robot, localPos, environment);
 
@@ -59,6 +60,10 @@ public class Laser extends Device {
 		this.addPoint(100, 2);
 		this.addPoint(100, -2);
 		this.addPoint(0, -2);
+	}
+	
+	public double getStep(){
+		return this.numSteps;
 	}
 
 	double read(boolean first) {

@@ -16,6 +16,7 @@ import model.environment.Position;
 import model.robot.MobileRobot;
 
 import java.awt.Polygon;
+import java.awt.geom.Ellipse2D.Double;
 import java.awt.Color;
 
 import java.io.PrintWriter;
@@ -29,7 +30,7 @@ public abstract class Device implements Runnable {
 	// A final object to make sure the lock cannot be overwritten with another Object
 	private final Object lock = new Object();
   	private final String name;                    // the name of this device
-	private final Polygon shape;                  // the device's shape in local coords
+	protected final Polygon shape;                  // the device's shape in local coords
 
     // a reference to the environment
     protected final Environment environment;
@@ -77,6 +78,7 @@ public abstract class Device implements Runnable {
 		shape.addPoint(x, y);
 	}
 
+	public abstract double getStep();
 
 	public boolean sendCommand(String command) {
 		commands.add(command);

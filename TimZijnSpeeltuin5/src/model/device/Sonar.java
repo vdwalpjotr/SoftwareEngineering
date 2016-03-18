@@ -19,6 +19,7 @@ import model.robot.MobileRobot;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -48,17 +49,18 @@ public class Sonar extends Device {
 
 	public Sonar(String name, MobileRobot robot, Position localPos, Environment environment) {
 		super(name, robot, localPos, environment);
-
+		
 		this.detect = false;
 		this.scan = false;
 
 		this.scanMeasurements = new ArrayList<LaserMeasurement>();
 
 		backgroundColor = Color.pink;
-		this.addPoint(0, 2);
-		this.addPoint(100, 2);
-		this.addPoint(100, -2);
-		this.addPoint(0, -2);
+//		
+//		this.addPoint(0, 2);
+//		this.addPoint(100, 2);
+//		this.addPoint(100, -2);
+//		this.addPoint(0, -2);
 	}
 
 	double read(boolean first) {
@@ -137,6 +139,9 @@ public class Sonar extends Device {
 			}
 		}
 		return minDistance;
+	}
+	public double getStep(){
+		return this.numSteps;
 	}
 
 	public void executeCommand(String command) {
@@ -244,5 +249,9 @@ public class Sonar extends Device {
 				scanMeasurements.add(new LaserMeasurement(distance, localPosition.getT()));  // ??????????????
 			}
 		}
+	}
+
+	public int getRange() {
+		return this.range;
 	}
 }

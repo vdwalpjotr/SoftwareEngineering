@@ -109,4 +109,10 @@ public class Platform extends Device {
 		}
 	}
 
+	@Override
+	public double getStep() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

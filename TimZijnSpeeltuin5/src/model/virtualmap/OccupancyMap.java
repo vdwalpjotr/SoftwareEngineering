@@ -149,6 +149,7 @@ public class OccupancyMap {
 		this.environment = environment;
 	}
 
+
 	private void drawLaserBeam(double rx, double ry, double x, double y, boolean obstacle) {
 		int rxi = (int) Math.ceil(rx / CELL_DIMENSION);
 		int ryj = (int) Math.ceil(ry / CELL_DIMENSION);

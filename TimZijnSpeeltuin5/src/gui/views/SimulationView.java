@@ -29,6 +29,7 @@ package gui.views;
  */
 
 import model.device.Device;
+import model.device.Sonar;
 import model.environment.Environment;
 import model.environment.Obstacle;
 
@@ -122,6 +123,16 @@ public class SimulationView extends JPanel implements ActionListener {
 		g.fillPolygon(globalShape);
 		g.setColor(d.getForegroundColor());
 		g.drawPolygon(globalShape);
+		
+		if(d instanceof Sonar){
+			g.setColor(Color.GREEN);
+			
+			int r = (int)((360-((Sonar) d).getStep())/(360/((Sonar) d).getRange()));
+			int x = (int) (d.getRobotPosition().getX()-r);
+			int y = (int) (d.getRobotPosition().getY()-r);
+			g.drawOval(x, y, r*2, r*2);
+			
+		}
 	}
 
 
