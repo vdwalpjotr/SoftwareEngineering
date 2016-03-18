@@ -1,5 +1,6 @@
 package model.virtualmap;
 
+
 /**
  * Title    :   The Mobile Robot Explorer Simulation Environment v2.0
  * Copyright:   GNU General Public License as published by the Free Software Foundation
