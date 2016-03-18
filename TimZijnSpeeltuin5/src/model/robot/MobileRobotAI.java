@@ -88,6 +88,7 @@ public class MobileRobotAI implements Runnable {
 				// Check positions
 				double forward = measures[0];
 				double right = measures[90];
+				double right15 = measures[15];
 				
 				double forwardSonar = measuresSonar[10];
 				double rightSonar = measuresSonar[90];
@@ -99,12 +100,23 @@ public class MobileRobotAI implements Runnable {
 				if(right < 50 || rightSonar <50) {
 					// If wall is to far
 					if(forward > 50.0 && forwardSonar > 50.0) {
-						System.out.println("move 50");
+						if(right15 < 100 && forward == 100) {
+							robot.sendCommand("P1.ROTATELEFT 90");
+							result = input.readLine();							
+
+							robot.sendCommand("P1.MOVEFW " + 5);
+							result = input.readLine();
+
+							robot.sendCommand("P1.ROTATERIGHT 90");
+							result = input.readLine();
+						}
+						
+					//	System.out.println("move 50");
 						robot.sendCommand("P1.MOVEFW " + Math.min((forward - 50), (forwardSonar - 50)));
 						result = input.readLine();
 					}
 					else if(forward > 15.0 && forwardSonar > 15.0) {
-						System.out.println("move less");
+					//	System.out.println("move less");
 						robot.sendCommand("P1.MOVEFW " + Math.min((forward - 15.0), (forwardSonar - 15.0)));
 						result = input.readLine();
 					}
@@ -116,51 +128,41 @@ public class MobileRobotAI implements Runnable {
 				}
 				// If wall is to far or gone
 				else {
-					System.out.println("linenumber : 117");
+					//System.out.println("linenumber : 117");
 					boolean turn = true;
-					System.out.println("forward: " + forward);
-					while(measures[125] < 78.0 || measuresSonar[125] < 78.0) {
-						System.out.println("Swek");
-						if(measures[0] < 25 || measuresSonar[5] <25) {
-							turn = false;
-							
+					boolean turning = false;
+					//System.out.println("forward: " + forward);
+					System.out.println("Sonar 125: " + measuresSonar[125]);
+					System.out.println("Laser 125: " + measures[125]);
+					System.out.println("Sonar 130: " + measuresSonar[130]);					
+
+					while(measuresSonar[130] < 76.0) {
+						turning = true;
+						System.out.println("Sonar 125: " + measuresSonar[125]);
+						System.out.println("Sonar 130: " + measuresSonar[130]);	
+						if(measuresSonar[5] <25) {
+							turn = false;							
 							//running = false;
 							break;
 						}
 						
 						robot.sendCommand("P1.MOVEFW " + 10);
 						result = input.readLine();
-
-						// Search for wall
-						robot.sendCommand("L1.SCAN");
-						result = input.readLine();
-						parseMeasures(result, measures);
 						
 						robot.sendCommand("S1.SCAN");
 						result = input.readLine();
 						parseMeasures(result, measuresSonar);
 					}
-					if(turn == true) {
-						robot.sendCommand("P1.ROTATERIGHT 90");
-						result = input.readLine();						
-					}
-
-					// Search for wall
-					robot.sendCommand("L1.SCAN");
-					result = input.readLine();
-					parseMeasures(result, measures);
 					
-
-					robot.sendCommand("S1.SCAN");
-					result = input.readLine();
-					parseMeasures(result, measuresSonar);
-
-					while(measures[90] > 50 && measuresSonar[90] > 50) {
-						if(measures[0] < 25 || measuresSonar[5] < 25) {
+					while(measures[125] < 78.0 && turning == false) {
+						System.out.println("Laser 125: " + measures[125]);	
+						//System.out.println("Swek");
+						if(measures[0] < 25) {
+							turn = false;							
 							running = false;
 							break;
 						}
-						System.out.println("163");
+						
 						robot.sendCommand("P1.MOVEFW " + 10);
 						result = input.readLine();
 
@@ -168,12 +170,44 @@ public class MobileRobotAI implements Runnable {
 						robot.sendCommand("L1.SCAN");
 						result = input.readLine();
 						parseMeasures(result, measures);
-						System.out.println(measures[90]);
+					}
+					
+					if(turn == true) {
+						robot.sendCommand("P1.ROTATERIGHT 90");
+						result = input.readLine();		
+
+						// Search for wall
+						robot.sendCommand("L1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measures);
+						
+
+						robot.sendCommand("S1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measuresSonar);				
+					}
+
+					while(measures[90] > 50 && measuresSonar[90] > 50) {
+						if(measures[0] < 25 || measuresSonar[5] < 25) {
+							//running = false;
+							break;
+						}
+						//System.out.println("163");
+						robot.sendCommand("P1.MOVEFW " + 10);
+						result = input.readLine();
+
+						// Search for wall
+						robot.sendCommand("L1.SCAN");
+						result = input.readLine();
+						parseMeasures(result, measures);
+						//System.out.println(measures[90]);
 						robot.sendCommand("S1.SCAN");
 						result = input.readLine();
 						parseMeasures(result, measuresSonar); 
-						System.out.println(measuresSonar[90]);
+						//System.out.println(measuresSonar[90]);
 					}
+					
+					turning = false;
 				}
 
 				// If near starting position after minimal 10 steps park;
